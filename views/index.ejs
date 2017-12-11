@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>More GIFs</title>
+	</head>
+	<body>
+		<h2>More GIFs</h2>
+
+		<h3>Expand your GIF search</h3>
+
+		<input type="text" />
+
+		<hr />
+
+		<% gifUrls.forEach(function (url) { %>
+			<img height="150px" width="24%" src="<%=url%>" />
+		<% }); %>
+	</body>
+</html>
