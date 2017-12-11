@@ -3,10 +3,11 @@
 
 	var express = require('express');
 	var request = require('request-promise');
+	var CONFIG = require('./config.json');
 	var app = express();
 
 	function getGifs(search, limit) {
-		var apiKey = '?api_key=HqkDGuF6K54Z8AWPfZZ7TVZqR5KBvTEo';
+		var apiKey = '?api_key=' + CONFIG.GIPHY_API_KEY;
 		var apiLimit = '';
 		var query = '';
 		var url = 'http://api.giphy.com/v1/gifs';
