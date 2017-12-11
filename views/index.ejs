@@ -3,17 +3,18 @@
 		<title>More GIFs</title>
 	</head>
 	<body>
-		<h2>More GIFs</h2>
+		<a href="/"><h2>More GIFs</h2></a>
+		<h3>Expand your GIF journey</h3>
 
-		<h3>Expand your GIF search</h3>
-
-		<input type="text" onclick="<%= onClick %>" />
-		<input type="button" onclick="<%= onClick %>" />
+		<input id="search-input" type="text" placeholder="Enter Keywords" />
+		<input id="search-button" type="button" value="Search" />
 
 		<hr />
 
 		<% gifUrls.forEach(function (url) { %>
-			<img height="150px" width="24%" src="<%=url%>" />
+			<img height="150px" width="24%" src="<%= url %>" />
 		<% }); %>
+
+		<script type="text/javascript" src="/js/scripts.js"></script>
 	</body>
 </html>

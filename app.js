@@ -11,7 +11,7 @@
 		var query = '';
 		var url = 'http://api.giphy.com/v1/gifs';
 
-		// default giphy limit for response items is 25
+		// default api.giphy.com limit for response items is 25
 		if (limit && limit !== 25) {
 			apiLimit = '&limit=' + limit;
 		}
@@ -41,22 +41,17 @@
 				gifUrls.push(apiData.data[i].images.fixed_width.url);
 			}
 
-			res.locals = {
-				gifUrls: gifUrls,
-				onClick: makeSearch
-			}
-			res.render('index.ejs');
+			res.render('index.ejs', {
+				gifUrls: gifUrls
+			});
 		});
-	}
-
-	function makeSearch(event) {
-		console.log('here');
-		console.log(event);
 	}
 
 	app.get('/', handleRender);
 
 	app.get('/search/:search', handleRender);
+
+	app.use(express.static('public'));
 
 	app.listen(8080, function() {
 		console.log('Listening on port 8080');
