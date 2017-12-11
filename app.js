@@ -30,46 +30,33 @@
 		});
 	}
 
-	function makeSearch(event) {
+	function handleRender(req, res) {
+		var search = req.params.search;
+		var gifUrls = [];
 
+		getGifs(search, 20).then(function(data) {
+			var apiData = JSON.parse(data);
+
+			for(var i = 0; i < apiData.data.length; i++) {
+				gifUrls.push(apiData.data[i].images.fixed_width.url);
+			}
+
+			res.locals = {
+				gifUrls: gifUrls,
+				onClick: makeSearch
+			}
+			res.render('index.ejs');
+		});
 	}
 
-	app.get('/', function (req, res) {
-		var gifUrls = [];
+	function makeSearch(event) {
+		console.log('here');
+		console.log(event);
+	}
 
-		getGifs(null, 20).then(function(apiResponse) {
-			var data = JSON.parse(apiResponse);
+	app.get('/', handleRender);
 
-			for(var i = 0; i < data.data.length; i++) {
-				gifUrls.push(data.data[i].images.fixed_width.url);
-			}
-
-			res.locals = {
-				gifUrls: gifUrls,
-				onClick: makeSearch
-			}
-			res.render('index.ejs');
-		});
-	});
-
-	app.get('/search/:search', function(req, res) {
-		var gifUrls = [];
-		var search = req.params.search;
-
-		getGifs(search, 20).then(function(apiResponse) {
-			var data = JSON.parse(apiResponse);
-
-			for(var i = 0; i < data.data.length; i++) {
-				gifUrls.push(data.data[i].images.fixed_width.url);
-			}
-
-			res.locals = {
-				gifUrls: gifUrls,
-				onClick: makeSearch
-			}
-			res.render('index.ejs');
-		});
-	});
+	app.get('/search/:search', handleRender);
 
 	app.listen(8080, function() {
 		console.log('Listening on port 8080');
