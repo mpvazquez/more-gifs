@@ -12,19 +12,18 @@
 		var query = '';
 		var url = 'http://api.giphy.com/v1/gifs';
 
-		// default api.giphy.com limit for response items is 25
-		if (limit && limit !== 25) {
+		if (limit) {
 			apiLimit = '&limit=' + limit;
 		}
 
 		if (search) {
-			url += '/search';
+			url += '/search?';
 			query = '&q=' + search;
 		} else {
-			url += '/trending';
+			url += '/trending?';
 		}
 
-		url += ('?' + apiKey + apiLimit + query);
+		url += (apiKey + apiLimit + query);
 
 		return request(url, function(error, response, body) {
 			return response;
@@ -80,13 +79,11 @@
 	app.get('/expand/:search', function(req, res) {
 		var search = req.params.search;
 		var gifUrls = [];
-		console.log(search)
 
 		getSynonyms(search).then(function(data) {
-			var synonyms = parseSynonyms(data);
+			var synonymQuery = parseSynonyms(data);
 
-			getGifs(synonyms, 40).then(function(data) {
-				console.log(data);
+			getGifs(synonymQuery, 40).then(function(data) {
 				var apiData = JSON.parse(data);
 
 				for(var i = 0; i < apiData.data.length; i++) {
