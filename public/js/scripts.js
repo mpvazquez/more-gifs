@@ -12,6 +12,12 @@
 			}
 		});
 
+		searchButtonExpand.addEventListener('click', function() {
+			if (searchInput.value) {
+				document.location = '/expand/' + searchInput.value;
+			}
+		});
+
 		searchInput.addEventListener('keydown', function(event) {
 			// update router if 'enter' or 'return ' button is typed
 			if (event.keyCode === 13) {
@@ -20,7 +26,5 @@
 		});
 	}
 
-	document.addEventListener("DOMContentLoaded", function() {
-    setEventListeners();
-  });
+	document.addEventListener("DOMContentLoaded", setEventListeners);
 })();
