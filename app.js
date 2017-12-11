@@ -34,7 +34,7 @@
 		var search = req.params.search;
 		var gifUrls = [];
 
-		getGifs(search, 20).then(function(data) {
+		getGifs(search, 40).then(function(data) {
 			var apiData = JSON.parse(data);
 
 			for(var i = 0; i < apiData.data.length; i++) {
@@ -50,6 +50,8 @@
 	app.get('/', handleRender);
 
 	app.get('/search/:search', handleRender);
+
+	app.get('/expand/:search', handleRender);
 
 	app.use(express.static('public'));
 

@@ -4,6 +4,7 @@
 	function setEventListeners() {
 		var searchInput = document.getElementById('search-input');
 		var searchButton = document.getElementById('search-button');
+		var searchButtonExpand = document.getElementById('search-button-expand')
 
 		searchButton.addEventListener('click', function() {
 			if (searchInput.value) {
