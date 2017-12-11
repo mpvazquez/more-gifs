@@ -33,10 +33,10 @@
 
 	function getSynonyms(search) {
 		var apiKey = CONFIG.BIG_HUGE_LABS_THESAURUS_API_KEY;
-		var format = '/json';
+		var format = 'json';
 		var url = 'http://words.bighugelabs.com/api/2/';
 
-		url += apiKey + '/' + search + format;
+		url += apiKey + '/' + search + '/' + format;
 
 		return request(url, function(error, response, body) {
 			return response;
@@ -60,15 +60,43 @@
 		});
 	}
 
+	function parseSynonyms(data) {
+		var apiData = JSON.parse(data);
+		var keys = Object.keys(apiData);
+		var synonyms = [];
+
+		for (var i = 0; i < keys.length; i++) {
+			var synonymsList = apiData[keys[i]].syn;
+			synonyms = synonyms.concat(synonymsList);
+		}
+
+		return synonyms.join('+').replace(/ /g,"+");;
+	}
+
 	app.get('/', handleRender);
 
 	app.get('/search/:search', handleRender);
 
 	app.get('/expand/:search', function(req, res) {
 		var search = req.params.search;
+		var gifUrls = [];
+		console.log(search)
 
 		getSynonyms(search).then(function(data) {
-			console.log(data);
+			var synonyms = parseSynonyms(data);
+
+			getGifs(synonyms, 40).then(function(data) {
+				console.log(data);
+				var apiData = JSON.parse(data);
+
+				for(var i = 0; i < apiData.data.length; i++) {
+					gifUrls.push(apiData.data[i].images.fixed_width.url);
+				}
+
+				res.render('index.ejs', {
+					gifUrls: gifUrls
+				});
+			});			
 		});
 	});
 
