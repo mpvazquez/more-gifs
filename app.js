@@ -3,7 +3,9 @@
 
 	var express = require('express');
 	var request = require('request-promise');
+
 	var CONFIG = require('./config.json');
+
 	var app = express();
 
 	function getGifs(search, limit) {
@@ -42,11 +44,25 @@
 		});
 	}
 
-	function handleRender(req, res) {
-		var search = req.params.search;
-		var gifUrls = [];
+	function parseSynonyms(data) {
+		var apiData = JSON.parse(data);
+		var synonyms = [];
 
-		getGifs(search, 40).then(function(data) {
+		for (var key in apiData) {
+			var synonymsList = apiData[key].syn;
+			synonyms = synonyms.concat(synonymsList);
+		}
+
+		return synonyms.join('+').replace(/ /g,"+");;
+	}
+
+	function renderPage(req, res) {
+		var gifUrls = [];
+		var limit = 20;
+		var search = req.params.search;
+		var type = req.url.split('/')[1];
+
+		function renderGifs(data) {
 			var apiData = JSON.parse(data);
 
 			for(var i = 0; i < apiData.data.length; i++) {
@@ -56,51 +72,28 @@
 			res.render('index.ejs', {
 				gifUrls: gifUrls
 			});
-		});
-	}
-
-	function parseSynonyms(data) {
-		var apiData = JSON.parse(data);
-		var keys = Object.keys(apiData);
-		var synonyms = [];
-
-		for (var i = 0; i < keys.length; i++) {
-			var synonymsList = apiData[keys[i]].syn;
-			synonyms = synonyms.concat(synonymsList);
 		}
 
-		return synonyms.join('+').replace(/ /g,"+");;
+		if (type === 'expand') {
+			getSynonyms(search).then(function(data) {
+				search = parseSynonyms(data);
+
+				getGifs(search, limit).then(renderGifs);
+			});
+		} else {
+			getGifs(search, limit).then(renderGifs);
+		}
 	}
 
-	app.get('/', handleRender);
+	app.get('/', renderPage);
 
-	app.get('/search/:search', handleRender);
+	app.get('/search/:search', renderPage);
 
-	app.get('/expand/:search', function(req, res) {
-		var search = req.params.search;
-		var gifUrls = [];
-
-		getSynonyms(search).then(function(data) {
-			var synonymQuery = parseSynonyms(data);
-
-			getGifs(synonymQuery, 40).then(function(data) {
-				var apiData = JSON.parse(data);
-
-				for(var i = 0; i < apiData.data.length; i++) {
-					gifUrls.push(apiData.data[i].images.fixed_width.url);
-				}
-
-				res.render('index.ejs', {
-					gifUrls: gifUrls
-				});
-			});			
-		});
-	});
+	app.get('/expand/:search', renderPage);
 
 	app.use(express.static('public'));
 
 	app.listen(8080, function() {
 		console.log('Listening on port 8080');
 	});
-
-})();	
+})();
