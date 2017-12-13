@@ -1,10 +1,8 @@
 (function() {
 	'use strict';
 
-	function initilizeEventListeners() {
-		var currentSearch = document.location.pathname ?
-			document.location.pathname.split('/')[2] :
-			undefined;
+	function setEventListeners(pathQuery) {
+		var currentSearch = document.location.pathname ? pathQuery : undefined;
 
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
@@ -27,5 +25,25 @@
 		});
 	}
 
-	document.addEventListener("DOMContentLoaded", initilizeEventListeners);
+	function setLocalStorage(pathQuery) {
+		if (typeof Storage !== undefined) {
+			var pastSearches = JSON.parse(sessionStorage.getItem('pastSearches'));
+
+			if (!pathQuery) {
+		    sessionStorage.setItem('pastSearches', '[]');
+			} else {
+				pastSearches.push(pathQuery);
+				sessionStorage.setItem('pastSearches', JSON.stringify(pastSearches));
+			}
+		} else {
+	    console.error('Sorry, local web storage storage is not supported on your browser!');
+		}
+	}
+
+	document.addEventListener("DOMContentLoaded", function() {
+		var pathQuery = document.location.pathname.split('/')[1];
+
+		setEventListeners(pathQuery);
+		setLocalStorage(pathQuery);
+	});
 })();
