@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>More GIFs</title>
+		<meta charset="UTF-8">
 		<script type="text/javascript" src="/js/scripts.js"></script>
+		<title>More GIFs</title>
 	</head>
 	<body>
 		<a href="/"><h2>More GIFs</h2></a>
@@ -13,8 +15,13 @@
 
 		<hr />
 
+		<% if (type) { %>
+			<%- include(type); %>
+		<% }; %>
+
 		<% gifUrls.forEach(function (url) { %>
 			<img height="150px" width="24%" src="<%= url %>" />
 		<% }); %>
+
 	</body>
 </html>
