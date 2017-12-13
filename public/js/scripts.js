@@ -7,9 +7,13 @@
 		if (element) {
 			searchHistory.forEach(function(searchItem) {
 				var aTag = document.createElement('a');
-				aTag.textContent = searchItem;
+				var button = document.createElement('button');
+				
+				button.textContent = searchItem;
 				aTag.setAttribute('href', '/search/' + searchItem.replace(/ /g, '+'));
 				aTag.setAttribute('class', 'search-tag');
+				aTag.appendChild(button);
+
 				element.appendChild(aTag)
 				element.appendChild(document.createTextNode(' '));
 			});

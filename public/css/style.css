@@ -1,3 +1,8 @@
+a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
 body {
 	background: #8B3DB8;
 	color: #FFFFFF;
@@ -5,11 +10,27 @@ body {
 	font-family: sans-serif;
 }
 
-a {
-	color: #FFFFFF;
-	text-decoration: none;
+button {
+	cursor: pointer;
 }
 
 #main-content {
 	margin: 2rem;
+}
+
+.gif-results {
+	width: 24%;
+	height: 200px;
+}
+
+@media (max-width: 992px) {
+	.gif-results {
+		width: 49%;
+	}
+}
+
+@media (max-width: 768px) {
+	.gif-results {
+		width: 100%;
+	}
 }

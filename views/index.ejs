@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="/js/scripts.js"></script>
-		<link rel="stylesheet" href="css/normalize.css"/>
+		<link rel="stylesheet" href="/css/normalize.css"/>
 		<link rel="stylesheet" href="/css/style.css" />
 		<title>More GIFs</title>
 	</head>
@@ -15,7 +15,7 @@
 			<h3>Expand your GIF journey</h3>
 
 			<input id="search-input" type="text" placeholder="Enter GIF Keyword" />
-			<input id="search-button" type="button" value="Default Search" />
+			<input id="search-button" type="button" value="GO" />
 
 			<hr />
 
@@ -24,7 +24,7 @@
 			<% }; %>
 
 			<% gifUrls.forEach(function (url) { %>
-				<img height="150px" width="24%" src="<%= url %>" />
+				<img class="gif-results" src="<%= url %>" />
 			<% }); %>
 		</div>
 	</body>
