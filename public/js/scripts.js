@@ -7,28 +7,22 @@
 			undefined;
 
 		var searchButton = document.getElementById('search-button');
-		var searchButtonExpand = document.getElementById('search-button-expand');
 		var searchInput = document.getElementById('search-input');
 
-		function search(type) {
+		function search() {
 			var searchValue = searchInput.value || currentSearch;
+
 			if (searchValue) {
-				document.location = '/' + type + '/' + searchValue;
+				document.location = searchValue.replace(/ /g, '+');
 			}
 		}
 
-		searchButton.addEventListener('click', function() {
-			search('search');
-		});
-
-		searchButtonExpand.addEventListener('click', function() {
-			search('expand');
-		});
+		searchButton.addEventListener('click', search);
 
 		searchInput.addEventListener('keydown', function(event) {
 			// update router if 'enter' or 'return ' button is typed
 			if (event.keyCode === 13) {
-				search('search');
+				search();
 			}
 		});
 	}

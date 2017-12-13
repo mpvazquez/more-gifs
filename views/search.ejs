@@ -1,3 +1,5 @@
-<a href="/search/<%= search %>"><%= search %></a>
+<% synonyms.forEach(function(synonym) { %>
+	<a href="/<%= synonym.replace(/ /g, '+') %>"><%= synonym %></a>
+<% }); %>
 
 <hr />

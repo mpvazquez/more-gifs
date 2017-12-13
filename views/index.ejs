@@ -11,12 +11,11 @@
 
 		<input id="search-input" type="text" placeholder="Enter GIF Keyword" />
 		<input id="search-button" type="button" value="Default Search" />
-		<input id="search-button-expand" type="button" value="Expand Search" />
 
 		<hr />
 
-		<% if (type) { %>
-			<%- include(type); %>
+		<% if (synonyms) { %>
+			<% include ./search %>
 		<% }; %>
 
 		<% gifUrls.forEach(function (url) { %>

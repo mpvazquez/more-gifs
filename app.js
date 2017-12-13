@@ -59,8 +59,8 @@
 	function renderPage(req, res) {
 		var gifUrls = [];
 		var limit = 20;
-		var search = req.params.search;
-		var type = req.url.split('/')[1];
+		var search = req.params.search || null;
+		var synonyms = null;
 
 		function renderGifs(data) {
 			var apiData = JSON.parse(data);
@@ -72,28 +72,26 @@
 			res.render('index.ejs', {
 				gifUrls: gifUrls,
 				search: search,
-				type: type
+				synonyms: synonyms
 			});
 		}
 
-		if (type === 'expand') {
-			getSynonyms(search).then(function(data) {
-				search = parseSynonyms(data);
+		if (search) {
+			search = search.replace(/\+/g, ' ');
 
-				getGifs(search.join('+').replace(/ /g,"+"), limit)
-					.then(renderGifs);
+			getSynonyms(search).then(function(data) {
+				synonyms = parseSynonyms(data);
+
+				getGifs(search, limit).then(renderGifs);
 			});
 		} else {
-			getGifs(search, limit)
-				.then(renderGifs);
+			getGifs(search, limit).then(renderGifs);
 		}
 	}
 
 	app.get('/', renderPage);
 
-	app.get('/search/:search', renderPage);
-
-	app.get('/expand/:search', renderPage);
+	app.get('/:search', renderPage);
 
 	app.use(express.static('public'));
 
