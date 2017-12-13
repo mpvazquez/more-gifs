@@ -2,10 +2,12 @@
 
 <hr />
 
-<% synonyms.forEach(function(synonym) { %>
-	<% if (synonym) { %>
-		<a href="/search/<%= synonym.replace(/ /g, '+') %>"><%= synonym %></a>
-	<% }; %>
-<% }); %>
+<div id="search-synonyms">
+	<% synonyms.forEach(function(synonym) { %>
+		<% if (synonym) { %>
+				<a class="search-tag" href="/search/<%= synonym.replace(/ /g, '+') %>"><%= synonym %></a>
+		<% }; %>
+	<% }); %>
+</div>
 
 <hr />

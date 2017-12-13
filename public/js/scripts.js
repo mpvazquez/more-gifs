@@ -9,6 +9,7 @@
 				var aTag = document.createElement('a');
 				aTag.textContent = searchItem;
 				aTag.setAttribute('href', '/search/' + searchItem.replace(/ /g, '+'));
+				aTag.setAttribute('class', 'search-tag');
 				element.appendChild(aTag)
 				element.appendChild(document.createTextNode(' '));
 			});
