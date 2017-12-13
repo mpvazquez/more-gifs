@@ -1,8 +1,4 @@
-<% if (history.length) { %>
-	<% history.forEach(function(searchItem) { %>
-		<a href="/search/<%= searchItem.replace(/ /g, '+') %>"><%= searchItem %></a>
-	<% }); %>
-<% }; %>
+<div id="search-history"></div>
 
 <hr />
 

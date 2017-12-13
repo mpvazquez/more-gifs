@@ -1,15 +1,25 @@
 (function() {
 	'use strict';
 
-	function setEventListeners() {
-		var currentSearch = document.location.pathname ?
-			document.location.pathname.split('/')[2] :
-			undefined;
+	function renderSearchHistory(searchHistory) {
+		var element = document.getElementById('search-history');
+
+		searchHistory.forEach(function(searchItem) {
+			var aTag = document.createElement('a');
+			aTag.textContent = searchItem;
+			aTag.setAttribute('href', '/search/' + searchItem);
+			element.appendChild(aTag)
+			element.appendChild(document.createTextNode(' '));
+		});
+	}
+
+	function setEventListeners(searchPath) {
+		var currentSearch = document.location.pathname ? searchPath : undefined;
 
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
 
-		function search() {
+		function searchEvent() {
 			var searchValue = searchInput.value || currentSearch;
 
 			if (searchValue) {
@@ -17,16 +27,40 @@
 			}
 		}
 
-		searchButton.addEventListener('click', search);
+		searchButton.addEventListener('click', searchEvent);
 
 		searchInput.addEventListener('keydown', function(event) {
 			var enterKeyCode = event.keyCode === 13;
 
 			if (enterKeyCode) {
-				search();
+				searchEvent();
 			}
 		});
 	}
 
-	document.addEventListener("DOMContentLoaded", setEventListeners);
+	function setLocalStorage(searchHistory, searchPath) {
+		if (!searchPath) {
+	    sessionStorage.setItem('searchHistory', '[]');
+		} else {
+			if (searchHistory.indexOf(searchPath) === -1) {
+				searchHistory.push(searchPath);
+				sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+			}
+		}
+	}
+
+	document.addEventListener("DOMContentLoaded", function() {
+		var searchPath = document.location.pathname.split('/')[2];
+
+		setEventListeners(searchPath);
+
+		if (typeof Storage !== undefined) {
+			var searchHistory = JSON.parse(sessionStorage.getItem('searchHistory')) || [];
+
+			setLocalStorage(searchHistory, searchPath);
+			renderSearchHistory(searchHistory);
+		} else {
+			console.error('Sorry, local web storage storage is not supported on your browser!');
+		}
+	});
 })();

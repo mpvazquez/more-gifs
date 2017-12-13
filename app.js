@@ -8,8 +8,6 @@
 
 	var app = express();
 
-	var searchHistory = [];
-
 	function getGifs(search, limit) {
 		var apiKey = 'api_key=' + CONFIG.GIPHY_API_KEY;
 		var apiLimit = '';
@@ -74,7 +72,6 @@
 			res.render('index.ejs', {
 				gifUrls: gifUrls,
 				search: search,
-				history: searchHistory,
 				synonyms: synonyms
 			});
 		}
@@ -82,28 +79,23 @@
 		if (search) {
 			search = search.replace(/\+/g, ' ');
 
-			if (searchHistory.indexOf(search) === -1) {
-				searchHistory.push(search);
-			}
-
 			getSynonyms(search)
 				.catch(function(error) {
-					console.log(error);
+					console.error('getSynonyms Error: ', error);
 				})
 				.then(function(data) {
 					synonyms = parseSynonyms(data);
 
 					getGifs(search, limit)
 						.catch(function(error) {
-							console.log(error);
+							console.error('getGifs Error: ', error);
 						})
 						.then(renderGifs);
 				});
 		} else {
-			searchHistory = [];
 			getGifs(search, limit)
 				.catch(function(error) {
-					console.log(error);
+					console.error('getGifs Error: ', error);
 				})
 				.then(renderGifs);
 		}
