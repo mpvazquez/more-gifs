@@ -8,6 +8,8 @@
 
 	var app = express();
 
+	var searchHistory = [];
+
 	function getGifs(search, limit) {
 		var apiKey = 'api_key=' + CONFIG.GIPHY_API_KEY;
 		var apiLimit = '';
@@ -58,7 +60,7 @@
 
 	function renderPage(req, res) {
 		var gifUrls = [];
-		var limit = 20;
+		var limit = 40;
 		var search = req.params.search || null;
 		var synonyms = null;
 
@@ -72,6 +74,7 @@
 			res.render('index.ejs', {
 				gifUrls: gifUrls,
 				search: search,
+				searchHistory: searchHistory,
 				synonyms: synonyms
 			});
 		}
@@ -79,12 +82,17 @@
 		if (search) {
 			search = search.replace(/\+/g, ' ');
 
+			if (search !== 'favicon.ico' && searchHistory.indexOf(search) === -1) {
+				searchHistory.push(search);
+			}
+
 			getSynonyms(search).then(function(data) {
 				synonyms = parseSynonyms(data);
 
 				getGifs(search, limit).then(renderGifs);
 			});
 		} else {
+			searchHistory = [];
 			getGifs(search, limit).then(renderGifs);
 		}
 	}
