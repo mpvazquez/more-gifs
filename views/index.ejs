@@ -3,26 +3,29 @@
 	<head>
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="/js/scripts.js"></script>
+		<link rel="stylesheet" href="css/normalize.css"/>
+		<link rel="stylesheet" href="/css/style.css" />
 		<title>More GIFs</title>
 	</head>
 	<body>
-		<a href="/">
-			<h2>More GIFs</h2>
-		</a>
-		<h3>Expand your GIF journey</h3>
+		<div id="main-content">
+			<a href="/">
+				<h2>More GIFs</h2>
+			</a>
+			<h3>Expand your GIF journey</h3>
 
-		<input id="search-input" type="text" placeholder="Enter GIF Keyword" />
-		<input id="search-button" type="button" value="Default Search" />
+			<input id="search-input" type="text" placeholder="Enter GIF Keyword" />
+			<input id="search-button" type="button" value="Default Search" />
 
-		<hr />
+			<hr />
 
-		<% if (synonyms) { %>
-			<% include ./search %>
-		<% }; %>
+			<% if (synonyms) { %>
+				<% include ./search %>
+			<% }; %>
 
-		<% gifUrls.forEach(function (url) { %>
-			<img height="150px" width="24%" src="<%= url %>" />
-		<% }); %>
-
+			<% gifUrls.forEach(function (url) { %>
+				<img height="150px" width="24%" src="<%= url %>" />
+			<% }); %>
+		</div>
 	</body>
 </html>
