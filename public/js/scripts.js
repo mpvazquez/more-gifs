@@ -1,8 +1,10 @@
 (function() {
 	'use strict';
 
-	function setEventListeners(pathQuery) {
-		var currentSearch = document.location.pathname ? pathQuery : undefined;
+	function setEventListeners() {
+		var currentSearch = document.location.pathname ?
+			document.location.pathname.split('/')[1] :
+			undefined;
 
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
@@ -18,32 +20,13 @@
 		searchButton.addEventListener('click', search);
 
 		searchInput.addEventListener('keydown', function(event) {
-			// update router if 'enter' or 'return ' button is typed
-			if (event.keyCode === 13) {
+			var enterKeyCode = event.keyCode === 13;
+
+			if (enterKeyCode) {
 				search();
 			}
 		});
 	}
 
-	function setLocalStorage(pathQuery) {
-		if (typeof Storage !== undefined) {
-			var pastSearches = JSON.parse(sessionStorage.getItem('pastSearches'));
-
-			if (!pathQuery) {
-		    sessionStorage.setItem('pastSearches', '[]');
-			} else {
-				pastSearches.push(pathQuery);
-				sessionStorage.setItem('pastSearches', JSON.stringify(pastSearches));
-			}
-		} else {
-	    console.error('Sorry, local web storage storage is not supported on your browser!');
-		}
-	}
-
-	document.addEventListener("DOMContentLoaded", function() {
-		var pathQuery = document.location.pathname.split('/')[1];
-
-		setEventListeners(pathQuery);
-		setLocalStorage(pathQuery);
-	});
+	document.addEventListener("DOMContentLoaded", setEventListeners);
 })();
