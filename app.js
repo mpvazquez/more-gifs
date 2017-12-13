@@ -45,8 +45,15 @@
 	}
 
 	function parseSynonyms(data) {
-		var apiData = JSON.parse(data);
+		var apiData = '';
 		var synonyms = [];
+
+		try {
+			apiData = JSON.parse(data);
+		} catch (error) {
+			console.error(error);
+			return synonyms;
+		}
 
 		for (var key in apiData) {
 			var synonymsList = apiData[key].syn;
