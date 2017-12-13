@@ -4,13 +4,15 @@
 	function renderSearchHistory(searchHistory) {
 		var element = document.getElementById('search-history');
 
-		searchHistory.forEach(function(searchItem) {
-			var aTag = document.createElement('a');
-			aTag.textContent = searchItem;
-			aTag.setAttribute('href', '/search/' + searchItem);
-			element.appendChild(aTag)
-			element.appendChild(document.createTextNode(' '));
-		});
+		if (element) {
+			searchHistory.forEach(function(searchItem) {
+				var aTag = document.createElement('a');
+				aTag.textContent = searchItem;
+				aTag.setAttribute('href', '/search/' + searchItem.replace(/ /g, '+'));
+				element.appendChild(aTag)
+				element.appendChild(document.createTextNode(' '));
+			});
+		}
 	}
 
 	function setEventListeners(searchPath) {
@@ -39,13 +41,14 @@
 	}
 
 	function setLocalStorage(searchHistory, searchPath) {
-		if (!searchPath) {
-	    sessionStorage.setItem('searchHistory', '[]');
-		} else {
+		if (searchPath) {
+			console.log(searchPath)
 			if (searchHistory.indexOf(searchPath) === -1) {
-				searchHistory.push(searchPath);
+				searchHistory.push(searchPath.replace(/\+/g, ' '));
 				sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
 			}
+		} else {
+	    sessionStorage.setItem('searchHistory', '[]');
 		}
 	}
 
