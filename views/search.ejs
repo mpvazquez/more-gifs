@@ -1,6 +1,6 @@
-<% if (searchHistory.length) { %>
-	<% searchHistory.forEach(function(searchItem) { %>
-		<a href="/<%= searchItem.replace(/ /g, '+') %>"><%= searchItem %></a>
+<% if (history.length) { %>
+	<% history.forEach(function(searchItem) { %>
+		<a href="/search/<%= searchItem.replace(/ /g, '+') %>"><%= searchItem %></a>
 	<% }); %>
 <% }; %>
 
@@ -8,7 +8,7 @@
 
 <% synonyms.forEach(function(synonym) { %>
 	<% if (synonym) { %>
-		<a href="/<%= synonym.replace(/ /g, '+') %>"><%= synonym %></a>
+		<a href="/search/<%= synonym.replace(/ /g, '+') %>"><%= synonym %></a>
 	<% }; %>
 <% }); %>
 

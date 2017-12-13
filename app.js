@@ -60,7 +60,7 @@
 
 	function renderPage(req, res) {
 		var gifUrls = [];
-		var limit = 40;
+		var limit = 20;
 		var search = req.params.search || null;
 		var synonyms = null;
 
@@ -74,7 +74,7 @@
 			res.render('index.ejs', {
 				gifUrls: gifUrls,
 				search: search,
-				searchHistory: searchHistory,
+				history: searchHistory,
 				synonyms: synonyms
 			});
 		}
@@ -82,24 +82,36 @@
 		if (search) {
 			search = search.replace(/\+/g, ' ');
 
-			if (search !== 'favicon.ico' && searchHistory.indexOf(search) === -1) {
+			if (searchHistory.indexOf(search) === -1) {
 				searchHistory.push(search);
 			}
 
-			getSynonyms(search).then(function(data) {
-				synonyms = parseSynonyms(data);
+			getSynonyms(search)
+				.catch(function(error) {
+					console.log(error);
+				})
+				.then(function(data) {
+					synonyms = parseSynonyms(data);
 
-				getGifs(search, limit).then(renderGifs);
-			});
+					getGifs(search, limit)
+						.catch(function(error) {
+							console.log(error);
+						})
+						.then(renderGifs);
+				});
 		} else {
 			searchHistory = [];
-			getGifs(search, limit).then(renderGifs);
+			getGifs(search, limit)
+				.catch(function(error) {
+					console.log(error);
+				})
+				.then(renderGifs);
 		}
 	}
 
 	app.get('/', renderPage);
 
-	app.get('/:search', renderPage);
+	app.get('/search/:search', renderPage);
 
 	app.use(express.static('public'));
 

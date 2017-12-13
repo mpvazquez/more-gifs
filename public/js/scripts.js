@@ -3,7 +3,7 @@
 
 	function setEventListeners() {
 		var currentSearch = document.location.pathname ?
-			document.location.pathname.split('/')[1] :
+			document.location.pathname.split('/')[2] :
 			undefined;
 
 		var searchButton = document.getElementById('search-button');
@@ -13,7 +13,7 @@
 			var searchValue = searchInput.value || currentSearch;
 
 			if (searchValue) {
-				document.location = searchValue.replace(/ /g, '+');
+				document.location = '/search/' + searchValue.replace(/ /g, '+');
 			}
 		}
 
