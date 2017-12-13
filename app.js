@@ -53,7 +53,7 @@
 			synonyms = synonyms.concat(synonymsList);
 		}
 
-		return synonyms.join('+').replace(/ /g,"+");;
+		return synonyms;
 	}
 
 	function renderPage(req, res) {
@@ -70,7 +70,9 @@
 			}
 
 			res.render('index.ejs', {
-				gifUrls: gifUrls
+				gifUrls: gifUrls,
+				search: search,
+				type: type
 			});
 		}
 
@@ -78,10 +80,12 @@
 			getSynonyms(search).then(function(data) {
 				search = parseSynonyms(data);
 
-				getGifs(search, limit).then(renderGifs);
+				getGifs(search.join('+').replace(/ /g,"+"), limit)
+					.then(renderGifs);
 			});
 		} else {
-			getGifs(search, limit).then(renderGifs);
+			getGifs(search, limit)
+				.then(renderGifs);
 		}
 	}
 

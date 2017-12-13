@@ -11,7 +11,6 @@
 		var searchInput = document.getElementById('search-input');
 
 		function search(type) {
-			console.log('here');
 			var searchValue = searchInput.value || currentSearch;
 			if (searchValue) {
 				document.location = '/' + type + '/' + searchValue;
