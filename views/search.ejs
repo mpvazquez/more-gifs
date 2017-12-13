@@ -1,5 +1,15 @@
+<% if (searchHistory.length) { %>
+	<% searchHistory.forEach(function(searchItem) { %>
+		<a href="/<%= searchItem.replace(/ /g, '+') %>"><%= searchItem %></a>
+	<% }); %>
+<% }; %>
+
+<hr />
+
 <% synonyms.forEach(function(synonym) { %>
-	<a href="/<%= synonym.replace(/ /g, '+') %>"><%= synonym %></a>
+	<% if (synonym) { %>
+		<a href="/<%= synonym.replace(/ /g, '+') %>"><%= synonym %></a>
+	<% }; %>
 <% }); %>
 
 <hr />
