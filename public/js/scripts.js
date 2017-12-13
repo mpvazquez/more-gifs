@@ -42,9 +42,9 @@
 
 	function setLocalStorage(searchHistory, searchPath) {
 		if (searchPath) {
-			console.log(searchPath)
+			searchPath = searchPath.replace(/\+/g, ' ');
 			if (searchHistory.indexOf(searchPath) === -1) {
-				searchHistory.push(searchPath.replace(/\+/g, ' '));
+				searchHistory.push(searchPath);
 				sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
 			}
 		} else {
