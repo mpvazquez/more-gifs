@@ -15,22 +15,24 @@ button {
 }
 
 #main-content {
-	margin: 2rem;
+	margin: 0 10px;
 }
 
 .gif-results {
-	width: 24%;
 	height: 200px;
+	width: 24%;
 }
 
 @media (max-width: 992px) {
 	.gif-results {
+		height: 250px;
 		width: 49%;
 	}
 }
 
 @media (max-width: 768px) {
 	.gif-results {
+		height: 150px;
 		width: 100%;
 	}
 }
