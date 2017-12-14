@@ -28,6 +28,9 @@
 		url += (apiKey + apiLimit + query);
 
 		return request(url, function(error, response, body) {
+			if (error) {
+				console.error(error);
+			}
 			return response;
 		});
 	}
@@ -40,24 +43,25 @@
 		url += apiKey + '/' + search + '/' + format;
 
 		return request(url, function(error, response, body) {
+			if (error) {
+				console.error(error);
+			}
 			return response;
 		});
 	}
 
 	function parseSynonyms(data) {
-		var apiData = '';
 		var synonyms = [];
 
 		try {
-			apiData = JSON.parse(data);
+			var apiData = JSON.parse(data);
+
+			for (var key in apiData) {
+				var synonymsList = apiData[key].syn;
+				synonyms = synonyms.concat(synonymsList);
+			}
 		} catch (error) {
 			console.error(error);
-			return synonyms;
-		}
-
-		for (var key in apiData) {
-			var synonymsList = apiData[key].syn;
-			synonyms = synonyms.concat(synonymsList);
 		}
 
 		return synonyms;
