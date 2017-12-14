@@ -110,11 +110,15 @@
 		}
 	}
 
+	app.use(express.static('public'));
+
 	app.get('/', renderPage);
 
 	app.get('/search/:search', renderPage);
 
-	app.use(express.static('public'));
+	app.get('/*', function(req, res){
+	  res.status(404).render('404.ejs');
+	});
 
 	app.listen(8080, function() {
 		console.log('Listening on port 8080');
