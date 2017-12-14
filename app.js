@@ -29,7 +29,7 @@
 
 		return request(url, function(error, response, body) {
 			if (error) {
-				console.error(error);
+				handleError(error);
 			}
 			return response;
 		});
@@ -44,10 +44,14 @@
 
 		return request(url, function(error, response, body) {
 			if (error) {
-				console.error(error);
+				handleError(error);
 			}
 			return response;
 		});
+	}
+
+	function handleError(error) {
+		console.error(error);
 	}
 
 	function parseSynonyms(data) {
@@ -61,7 +65,7 @@
 				synonyms = synonyms.concat(synonymsList);
 			}
 		} catch (error) {
-			console.error(error);
+			handleError(error);
 		}
 
 		return synonyms;
@@ -91,23 +95,17 @@
 			search = search.replace(/\+/g, ' ');
 
 			getSynonyms(search)
-				.catch(function(error) {
-					console.error('getSynonyms Error: ', error);
-				})
+				.catch(handleError)
 				.then(function(data) {
 					synonyms = parseSynonyms(data);
 
 					getGifs(search, limit)
-						.catch(function(error) {
-							console.error('getGifs Error: ', error);
-						})
+						.catch(handleError)
 						.then(renderGifs);
 				});
 		} else {
 			getGifs(search, limit)
-				.catch(function(error) {
-					console.error('getGifs Error: ', error);
-				})
+				.catch(handleError)
 				.then(renderGifs);
 		}
 	}
