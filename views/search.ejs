@@ -1,16 +1,20 @@
 <div id="search-keywords">
-	<div id="search-synonyms">
-		<% synonyms.forEach(function(synonym) { %>
-			<% if (synonym) { %>
+	<% if (synonyms.length) { %>
+		<p>Try Related Search Terms</p>
+		<div id="search-synonyms">
+			<% synonyms.forEach(function(synonym) { %>
+				<% if (synonym) { %>
 					<a class="search-tag" href="/search/<%= synonym.replace(/ /g, '+') %>">
 						<button><%= synonym %></button>
 					</a>
-			<% }; %>
-		<% }); %>
-	</div>
+				<% }; %>
+			<% }); %>
+		</div>
 
-	<hr />
+		<hr />
+	<% }; %>
 
+	<p>View Search History</p>
 	<div id="search-history"></div>
 
 	<hr />

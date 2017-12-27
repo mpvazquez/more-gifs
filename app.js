@@ -4,15 +4,18 @@
 	var express = require('express');
 	var request = require('request-promise');
 
-	var app = express();
+	var BIG_HUGE_LABS_THESAURUS_API_KEY = process.env.BIG_HUGE_LABS_THESAURUS_API_KEY;
+	var GIPHY_API_KEY = process.env.GIPHY_API_KEY;
 	var PORT = process.env.PORT || 8080;
+
+	var app = express();
 
 	function errorHandler(error) {
 		console.error(error);
 	}
 
 	function getGifs(search, limit, offset) {
-		var apiKey = 'api_key=' + process.env.GIPHY_API_KEY;
+		var apiKey = 'api_key=' + GIPHY_API_KEY;
 		var apiLimit = '';
 		var offset = '';
 		var query = '';
@@ -35,27 +38,16 @@
 
 		url += (apiKey + apiLimit + offset + query);
 
-		return request(url, function(error, response, body) {
-			if (error) {
-				errorHandler(error);
-			}
-			return response;
-		});
+		return request(url, requestCallback);
 	}
 
 	function getSynonyms(search) {
-		var apiKey = process.env.BIG_HUGE_LABS_THESAURUS_API_KEY;
 		var format = 'json';
 		var url = 'http://words.bighugelabs.com/api/2/';
 
-		url += apiKey + '/' + search + '/' + format;
+		url += BIG_HUGE_LABS_THESAURUS_API_KEY + '/' + search + '/' + format;
 
-		return request(url, function(error, response, body) {
-			if (error) {
-				errorHandler(error);
-			}
-			return response;
-		});
+		return request(url, requestCallback);
 	}
 
 	function parseSynonyms(data) {
@@ -77,7 +69,7 @@
 
 	function renderPage(req, res) {
 		var gifUrls = [];
-		var limit = 20;
+		var limit = 40;
 		var offset = 0;
 		var search = req.params.search || null;
 		var synonyms = null;
@@ -113,6 +105,13 @@
 				.catch(errorHandler)
 				.then(renderGifs);
 		}
+	}
+
+	function requestCallback(error, response, body) {
+		if (error) {
+			errorHandler(error);
+		}
+		return response;
 	}
 
 	app.use(express.static('public'));
