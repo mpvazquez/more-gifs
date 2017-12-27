@@ -37,7 +37,7 @@ button {
 
 @media (max-width: 768px) {
 	.gif-results {
-		height: 150px;
+		height: 300px;
 		width: 100%;
 	}
 }
