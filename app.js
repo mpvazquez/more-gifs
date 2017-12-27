@@ -68,7 +68,7 @@
 	}
 
 	function renderPage(req, res) {
-		var gifUrls = [];
+		var gifs = [];
 		var limit = 40;
 		var offset = 0;
 		var search = req.params.search || null;
@@ -78,11 +78,15 @@
 			var apiData = JSON.parse(data);
 
 			for(var i = 0; i < apiData.data.length; i++) {
-				gifUrls.push(apiData.data[i].images.fixed_width.url);
+				gifs.push({
+					image: apiData.data[i].images.fixed_width.url,
+					title: apiData.data[i].title,
+					url: apiData.data[i].url
+				});
 			}
 
 			res.render('index.ejs', {
-				gifUrls: gifUrls,
+				gifs: gifs,
 				search: search,
 				synonyms: synonyms
 			});

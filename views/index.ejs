@@ -23,8 +23,10 @@
 				<% include ./search %>
 			<% }; %>
 
-			<% gifUrls.forEach(function (url) { %>
-				<img class="gif-results" src="<%= url %>" />
+			<% gifs.forEach(function (gif) { %>
+				<a href="<%= gif.url %>" target="_blank">
+					<img alt="<%= gif.title %>" class="gif-results" src="<%= gif.image %>" />
+				</a>
 			<% }); %>
 
 		</div>
