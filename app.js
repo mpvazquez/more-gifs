@@ -4,11 +4,11 @@
 	var express = require('express');
 	var request = require('request-promise');
 
-	var app = express();
-
 	var PORT = process.env.PORT || 8080;
 
-	function handleError(error) {
+	var app = express();
+
+	function errorHandler(error) {
 		console.error(error);
 	}
 
@@ -38,7 +38,7 @@
 
 		return request(url, function(error, response, body) {
 			if (error) {
-				handleError(error);
+				errorHandler(error);
 			}
 			return response;
 		});
@@ -53,7 +53,7 @@
 
 		return request(url, function(error, response, body) {
 			if (error) {
-				handleError(error);
+				errorHandler(error);
 			}
 			return response;
 		});
@@ -70,7 +70,7 @@
 				synonyms = synonyms.concat(synonymsList);
 			}
 		} catch (error) {
-			handleError(error);
+			errorHandler(error);
 		}
 
 		return synonyms;
@@ -101,17 +101,17 @@
 			search = search.replace(/\+/g, ' ');
 
 			getSynonyms(search)
-				.catch(handleError)
+				.catch(errorHandler)
 				.then(function(data) {
 					synonyms = parseSynonyms(data);
 
 					getGifs(search, limit)
-						.catch(handleError)
+						.catch(errorHandler)
 						.then(renderGifs);
 				});
 		} else {
 			getGifs(search, limit)
-				.catch(handleError)
+				.catch(errorHandler)
 				.then(renderGifs);
 		}
 	}
@@ -122,11 +122,12 @@
 
 	app.get('/search/:search', renderPage);
 
-	app.get('/*', function(req, res){
+	app.get('/*', function(req, res) {
 	  res.status(404).render('404.ejs');
 	});
 
 	app.listen(PORT, function() {
 		console.log('Listening on port', PORT);
 	});
+
 })();
