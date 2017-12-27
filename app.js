@@ -6,6 +6,8 @@
 
 	var app = express();
 
+	var PORT = process.env.PORT || 8080;
+
 	function handleError(error) {
 		console.error(error);
 	}
@@ -124,7 +126,7 @@
 	  res.status(404).render('404.ejs');
 	});
 
-	app.listen(process.env.PORT, function() {
-		console.log('Listening on port 5000 or', process.env.PORT);
+	app.listen(PORT, function() {
+		console.log('Listening on port ', PORT);
 	});
 })();
