@@ -4,9 +4,8 @@
 	var express = require('express');
 	var request = require('request-promise');
 
-	var PORT = process.env.PORT || 8080;
-
 	var app = express();
+	var PORT = process.env.PORT || 8080;
 
 	function errorHandler(error) {
 		console.error(error);
