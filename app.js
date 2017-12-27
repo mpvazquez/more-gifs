@@ -8,14 +8,23 @@
 
 	var app = express();
 
-	function getGifs(search, limit) {
+	function handleError(error) {
+		console.error(error);
+	}
+
+	function getGifs(search, limit, offset) {
 		var apiKey = 'api_key=' + CONFIG.GIPHY_API_KEY;
 		var apiLimit = '';
+		var offset = '';
 		var query = '';
 		var url = 'http://api.giphy.com/v1/gifs';
 
 		if (limit) {
 			apiLimit = '&limit=' + limit;
+		}
+
+		if (offset) {
+			offset = '&offset=' + offset;
 		}
 
 		if (search) {
@@ -25,7 +34,7 @@
 			url += '/trending?';
 		}
 
-		url += (apiKey + apiLimit + query);
+		url += (apiKey + apiLimit + offset + query);
 
 		return request(url, function(error, response, body) {
 			if (error) {
@@ -50,10 +59,6 @@
 		});
 	}
 
-	function handleError(error) {
-		console.error(error);
-	}
-
 	function parseSynonyms(data) {
 		var synonyms = [];
 
@@ -74,6 +79,7 @@
 	function renderPage(req, res) {
 		var gifUrls = [];
 		var limit = 20;
+		var offset = 0;
 		var search = req.params.search || null;
 		var synonyms = null;
 
