@@ -4,8 +4,6 @@
 	var express = require('express');
 	var request = require('request-promise');
 
-	var CONFIG = require('./config.json');
-
 	var app = express();
 
 	function handleError(error) {
@@ -13,7 +11,7 @@
 	}
 
 	function getGifs(search, limit, offset) {
-		var apiKey = 'api_key=' + CONFIG.GIPHY_API_KEY;
+		var apiKey = 'api_key=' + process.env.GIPHY_API_KEY;
 		var apiLimit = '';
 		var offset = '';
 		var query = '';
@@ -45,7 +43,7 @@
 	}
 
 	function getSynonyms(search) {
-		var apiKey = CONFIG.BIG_HUGE_LABS_THESAURUS_API_KEY;
+		var apiKey = process.env.BIG_HUGE_LABS_THESAURUS_API_KEY;
 		var format = 'json';
 		var url = 'http://words.bighugelabs.com/api/2/';
 
