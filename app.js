@@ -124,7 +124,7 @@
 	  res.status(404).render('404.ejs');
 	});
 
-	app.listen(5000, function() {
-		console.log('Listening on port 5000');
+	app.listen(process.env.PORT, function() {
+		console.log('Listening on port 5000 or', process.env.PORT);
 	});
 })();
