@@ -23,21 +23,11 @@ button {
 	height: 100%;
 }
 
-.gif-results {
-	height: 200px;
-	width: 24%;
+.grid {
+ 	margin: 10px auto;
 }
 
-@media (max-width: 992px) {
-	.gif-results {
-		height: 250px;
-		width: 49%;
-	}
-}
-
-@media (max-width: 768px) {
-	.gif-results {
-		height: 300px;
-		width: 100%;
-	}
+.grid-item {
+	margin-bottom: 2px;
+	width: 250px;
 }

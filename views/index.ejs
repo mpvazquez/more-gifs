@@ -6,6 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript" src="/js/scripts.js"></script>
+		<script type="text/javascript" src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 		<title>More GIFs</title>
 	</head>
 	<body>
@@ -23,11 +24,13 @@
 				<% include ./search %>
 			<% }; %>
 
-			<% gifs.forEach(function (gif) { %>
-				<a href="<%= gif.url %>" target="_blank">
-					<img alt="<%= gif.title %>" class="gif-results" src="<%= gif.image %>" />
-				</a>
-			<% }); %>
+			<div class="grid">
+				<% gifs.forEach(function (gif) { %>
+					<a href="<%= gif.url %>" target="_blank">
+						<img alt="<%= gif.title %>" class="grid-item" src="<%= gif.image  %>" />
+					</a>
+				<% }); %>
+			</div>
 
 		</div>
 	</body>

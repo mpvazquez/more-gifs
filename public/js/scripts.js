@@ -1,6 +1,8 @@
 (function() {
 	'use strict';
 
+	var masonry;
+
 	function renderSearchHistory(searchHistory) {
 		var historyContainer = document.getElementById('search-history-container');
 
@@ -32,6 +34,8 @@
 			}
 		}
 
+		document.addEventListener('load', masonry.layout());
+
 		searchButton.addEventListener('click', searchEvent);
 
 		searchInput.addEventListener('keydown', function(event) {
@@ -56,7 +60,15 @@
 	}
 
 	document.addEventListener("DOMContentLoaded", function() {
+		var gridElement = document.querySelector('.grid');
 		var searchPath = document.location.pathname.split('/')[2];
+
+		masonry = new Masonry(gridElement, {
+			gutter: 2,
+			fitWidth: true,
+			itemSelector: '.grid-item',
+			columnWidth: 250
+		});
 
 		setEventListeners(searchPath);
 
@@ -66,9 +78,10 @@
 			setLocalStorage(searchHistory, searchPath);
 			renderSearchHistory(searchHistory);
 		} else {
-			console.error('Sorry, local web storage storage is not supported on your browser!');
-
 			document.getElementById('search-history').remove();
+
+			console.error('Sorry, local web storage storage is not supported on your browser!');
 		}
 	});
+
 })();
