@@ -1,5 +1,6 @@
 <div id="search-keywords">
 	<% if (synonyms.length) { %>
+	<div id="related-terms">
 		<p>Try Related Search Terms</p>
 		<div id="search-synonyms">
 			<% synonyms.forEach(function(synonym) { %>
@@ -12,10 +13,13 @@
 		</div>
 
 		<hr />
+	</div>
 	<% }; %>
 
-	<p>View Search History</p>
-	<div id="search-history"></div>
+	<div id="search-history">
+		<p>View Search History</p>
+		<div id="search-history-container"></div>
 
-	<hr />
+		<hr />
+	</div>
 </div>

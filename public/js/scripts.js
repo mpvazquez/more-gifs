@@ -2,9 +2,9 @@
 	'use strict';
 
 	function renderSearchHistory(searchHistory) {
-		var element = document.getElementById('search-history');
+		var historyContainer = document.getElementById('search-history-container');
 
-		if (element) {
+		if (historyContainer) {
 			searchHistory.forEach(function(searchItem) {
 				var aTag = document.createElement('a');
 				var button = document.createElement('button');
@@ -14,8 +14,8 @@
 				aTag.setAttribute('class', 'search-tag');
 				aTag.appendChild(button);
 
-				element.appendChild(aTag);
-				element.appendChild(document.createTextNode(' '));
+				historyContainer.appendChild(aTag);
+				historyContainer.appendChild(document.createTextNode(' '));
 			});
 		}
 	}
@@ -56,7 +56,7 @@
 	}
 
 	document.addEventListener("DOMContentLoaded", function() {
-		var searchPath = document.location.pathname.split('/')[2] || undefined;
+		var searchPath = document.location.pathname.split('/')[2];
 
 		setEventListeners(searchPath);
 
@@ -67,6 +67,8 @@
 			renderSearchHistory(searchHistory);
 		} else {
 			console.error('Sorry, local web storage storage is not supported on your browser!');
+
+			document.getElementById('search-history').remove();
 		}
 	});
 })();
