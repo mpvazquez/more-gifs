@@ -14,20 +14,18 @@
 				aTag.setAttribute('class', 'search-tag');
 				aTag.appendChild(button);
 
-				element.appendChild(aTag)
+				element.appendChild(aTag);
 				element.appendChild(document.createTextNode(' '));
 			});
 		}
 	}
 
 	function setEventListeners(searchPath) {
-		var currentSearch = document.location.pathname ? searchPath : undefined;
-
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
 
 		function searchEvent() {
-			var searchValue = searchInput.value || currentSearch;
+			var searchValue = searchInput.value || searchPath;
 
 			if (searchValue) {
 				document.location = '/search/' + searchValue.replace(/ /g, '+');
@@ -58,7 +56,7 @@
 	}
 
 	document.addEventListener("DOMContentLoaded", function() {
-		var searchPath = document.location.pathname.split('/')[2];
+		var searchPath = document.location.pathname.split('/')[2] || undefined;
 
 		setEventListeners(searchPath);
 
