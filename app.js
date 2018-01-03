@@ -84,7 +84,7 @@
 		function renderGifs(data) {
 			var apiData = JSON.parse(data);
 
-			for(var i = 0; i < apiData.data.length; i++) {
+			for (var i = 0; i < apiData.data.length; i++) {
 				gifs.push({
 					image: apiData.data[i].images.fixed_width.url,
 					title: apiData.data[i].title,
