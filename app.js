@@ -10,10 +10,6 @@
 
 	var app = express();
 
-	function errorHandler(error) {
-		console.error(error);
-	}
-
 	function getGifs(search, limit, offset) {
 		var apiKey = 'api_key=' + GIPHY_API_KEY;
 		var apiLimit = '';
@@ -38,7 +34,7 @@
 
 		url += (apiKey + apiLimit + offset + query);
 
-		return request(url, requestCallback);
+		return request(url, handleRequest);
 	}
 
 	function getSynonyms(search) {
@@ -47,7 +43,18 @@
 
 		url += BIG_HUGE_LABS_THESAURUS_API_KEY + '/' + search + '/' + format;
 
-		return request(url, requestCallback);
+		return request(url, handleRequest);
+	}
+
+	function handleError(error) {
+		console.error(error);
+	}
+
+	function handleRequest(error, response, body) {
+		if (error) {
+			handleError(error);
+		}
+		return response;
 	}
 
 	function parseSynonyms(data) {
@@ -61,7 +68,7 @@
 				synonyms = synonyms.concat(synonymsList);
 			}
 		} catch (error) {
-			errorHandler(error);
+			handleError(error);
 		}
 
 		return synonyms;
@@ -96,26 +103,19 @@
 			search = search.replace(/\+/g, ' ');
 
 			getSynonyms(search)
-				.catch(errorHandler)
+				.catch(handleError)
 				.then(function(data) {
 					synonyms = parseSynonyms(data);
 
 					getGifs(search, limit)
-						.catch(errorHandler)
+						.catch(handleError)
 						.then(renderGifs);
 				});
 		} else {
 			getGifs(search, limit)
-				.catch(errorHandler)
+				.catch(handleError)
 				.then(renderGifs);
 		}
-	}
-
-	function requestCallback(error, response, body) {
-		if (error) {
-			errorHandler(error);
-		}
-		return response;
 	}
 
 	app.use(express.static('public'));

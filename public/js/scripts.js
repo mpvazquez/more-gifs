@@ -53,7 +53,7 @@
 				sessionStorage.setItem('searchHistory', JSON.stringify(searchHistory));
 			}
 		} else {
-	    sessionStorage.setItem('searchHistory', '[]');
+		    sessionStorage.setItem('searchHistory', '[]');
 		}
 	}
 
