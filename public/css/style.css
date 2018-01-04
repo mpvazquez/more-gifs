@@ -30,4 +30,5 @@ button {
 .grid-item {
 	margin-bottom: 2px;
 	width: 250px;
+	vertical-align: top;
 }
