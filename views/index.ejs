@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+		<link rel="shortcut icon" href="/images/favicon.ico">
+
+		<link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
 		<link rel="stylesheet" href="/css/normalize.css"/>
 		<link rel="stylesheet" href="/css/style.css" />
-		<link rel="shortcut icon" href="/images/favicon.ico">
+
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script type="text/javascript" src="/js/scripts.js"></script>
+
 		<script type="text/javascript" src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+		<script type="text/javascript" src="/js/scripts.js"></script>
+
 		<title>More GIFs</title>
 	</head>
+
 	<body>
-		<div id="main-content">
-			<nav>
-				<a href="/">
-					<h2><i class="em em-mostly_sunny"></i> MORE GIFs: <em>Expand your GIF journey</em></h2>
-				</a>
-			</nav>
-				
-			<a href="https://giphy.com/" target="_blank">
-				<img alt="Powered By Giphy" src="/images/PoweredBy_200px-Black_HorizLogo.png" id="giphy-logo-badge">
+		<nav>
+			<a href="/">
+				<h2>
+					<i class="em em-mostly_sunny"></i> 
+					<span> MORE GIFs: <em>Expand Your GIF Journey</em></span>
+				</h2>
 			</a>
-				
-			<div id="search-input-container">
-				<span>STEP 1: <i class="em em-point_right"></i>&nbsp; </span>
-				<input id="search-input" type="text" placeholder=" Enter GIF Keyword" />
-				<button id="search-button" value="Go">GO<i class="em em-mag_right"></i></i></button>
-			</div>
+		</nav>
+			
+		<a href="https://giphy.com/" target="_blank">
+			<img alt="Powered By Giphy" src="/images/PoweredBy_200px-Black_HorizLogo.png" id="giphy-logo-badge" />
+		</a>
+			
+		<div id="search-input-container">
+			<span>STEP 1: <i class="em em-point_right"></i>&nbsp; </span>
+			<input id="search-input" type="text" placeholder=" Enter GIF Keyword" />
+			<button id="search-button" value="Go">
+				<span>GO<i class="em em-mag_right"></i></span>
+			</button>
+		</div>
 
-			<% if (synonyms) { %>
-				<% include ./search %>
-			<% }; %>
+		<% if (synonyms) { %>
+			<% include ./search %>
+		<% }; %>
 
-			<div class="grid">
-				<% gifs.forEach(function (gif) { %>
-					<a href="<%= gif.url %>" target="_blank">
-						<img alt="<%= gif.title %>" class="grid-item" src="<%= gif.image  %>" />
-					</a>
-				<% }); %>
-			</div>
-
+		<div class="grid">
+			<% gifs.forEach(function (gif) { %>
+				<a href="<%= gif.url %>" target="_blank">
+					<img alt="<%= gif.title %>" class="grid-item" src="<%= gif.image  %>" />
+				</a>
+			<% }); %>
 		</div>
 	</body>
 </html>
