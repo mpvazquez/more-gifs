@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	var API_LIMIT = 20;
+	var API_LIMIT = 60;
 	var masonry;
 	var offset = null;
 	var searchPath = null;
