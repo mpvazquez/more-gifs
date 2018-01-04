@@ -2,95 +2,23 @@
 	'use strict';
 
 	var express = require('express');
-	var request = require('request-promise');
 
-	var BIG_HUGE_LABS_THESAURUS_API_KEY = process.env.BIG_HUGE_LABS_THESAURUS_API_KEY;
-	var GIPHY_API_KEY = process.env.GIPHY_API_KEY;
+	var bigHugeLabsAPI = require('./helpers/big-huge-labs-api.js');
+	var giphyAPI = require('./helpers/giphy-api.js');
+	var handleError = require('./helpers/handle-api-error');
+	var parseApiResponse = require('./helpers/parse-api-response.js');
+
 	var PORT = process.env.PORT || 8080;
 	var QUERY_LIMIT = 40;
 
 	var app = express();
-
-	function getGifs(search, limit, offset) {
-		var apiKey = 'api_key=' + GIPHY_API_KEY;
-		var apiLimit = '';
-		var apiOffset = '';
-		var apiQuery = '';
-		var url = 'http://api.giphy.com/v1/gifs';
-
-		if (limit) {
-			apiLimit = '&limit=' + limit;
-		}
-
-		if (offset) {
-			apiOffset = '&offset=' + offset;
-		}
-
-		if (search) {
-			url += '/search?';
-			apiQuery = '&q=' + search;
-		} else {
-			url += '/trending?';
-		}
-
-		url += (apiKey + apiLimit + apiOffset + apiQuery);
-
-		return request(url, handleResponse);
-	}
-
-	function getSynonyms(search) {
-		var format = 'json';
-		var url = 'http://words.bighugelabs.com/api/2/';
-
-		url += BIG_HUGE_LABS_THESAURUS_API_KEY + '/' + search + '/' + format;
-
-		return request(url, handleResponse);
-	}
-
-	function handleError(error) {
-		console.error(error);
-	}
-
-	function handleResponse(error, response, body) {
-		if (error) {
-			handleError(error);
-		}
-		return response;
-	}
-
-	function parseApiResponse(response) {
-		var data = [];
-
-		try {
-			var json = JSON.parse(response);
-
-			if (json.data) {
-				for (var i = 0; i < json.data.length; i++) {
-					data.push({
-						image: json.data[i].images.fixed_width.url,
-						title: json.data[i].title,
-						url: json.data[i].url
-					});
-				}
-			} else {
-				for (var key in json) {
-					var synonymsList = json[key].syn;
-					data = data.concat(synonymsList);
-				}
-			}
-		} catch (error) {
-			handleError(error);
-		}
-
-		return data;
-	}
 
 	function render(req, res) {
 		var search = req.params.search || null;
 		var synonyms = null;
 
 		function renderPage() {
-			getGifs(search, QUERY_LIMIT)
+			giphyAPI(search, QUERY_LIMIT)
 				.catch(handleError)
 				.then(function(response) {
 					res.render('index.ejs', {
@@ -104,7 +32,7 @@
 		if (search) {
 			search = search.replace(/\+/g, ' ');
 
-			getSynonyms(search)
+			bigHugeLabsAPI(search)
 				.catch(handleError)
 				.then(function(response) {
 					synonyms = parseApiResponse(response);
@@ -121,7 +49,7 @@
 		var offset = req.query.offset;
 		var query = req.query.query;
 
-		getGifs(query, limit, offset)
+		giphyAPI(query, limit, offset)
 			.catch(handleError)
 			.then(function(response) {
 				var json = parseApiResponse(response);
@@ -133,11 +61,8 @@
 	app.use(express.static('public'));
 
 	app.get('/', render);
-
 	app.get('/get', returnApiData);
-
 	app.get('/search/:search', render);
-
 	app.get('/*', function(req, res) {
 	  res.status(404).render('404.ejs');
 	});
