@@ -14,15 +14,6 @@ button {
 	cursor: pointer;
 }
 
-#main-content {
-	margin: 0 10px;
-}
-
-#gif-404 {
-	width: 100%;
-	height: 100%;
-}
-
 .grid {
  	margin: 10px auto;
 }
@@ -32,3 +23,17 @@ button {
 	width: 250px;
 	vertical-align: top;
 }
+
+.search-tag > button {
+	margin-bottom: 5px;
+}
+
+#gif-404 {
+	height: 100%;
+	width: 100%;
+}
+
+#main-content {
+	margin: 0 10px;
+}
+
