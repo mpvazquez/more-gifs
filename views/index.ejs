@@ -41,21 +41,24 @@
 		<section>
 			<div class="grid">
 				<% gifs.forEach(function (gif) { %>
-					<a href="<%= gif.url %>" target="_blank">
-						<img alt="<%= gif.title %>" class="grid-item" src="<%= gif.image  %>" />
-					</a>
+				<a href="<%= gif.url %>" target="_blank">
+					<img alt="<%= gif.title %>" class="grid-item" src="<%= gif.image  %>" />
+				</a>
 				<% }); %>
 			</div>
 
-			<button id="more-button">MORE<i class="em em-mag_right"></i></button>
+			<button id="more-button">
+				<span>MORE </span>
+				<i class="em em-mag_right"></i>
+			</button>
 		</section>
 
 		<footer>
-			<p>This website was created by <a href="http://www.marcopvazquez.com/" target="_blank">Marco Pretell-Vázquez</a></p>
+			<p><a href="http://www.marcopvazquez.com/" target="_blank">This website was created by Marco Pretell-Vázquez</a></p>
+
 			<a href="https://giphy.com/" target="_blank">
 				<img alt="Powered By Giphy" src="/images/PoweredBy_200px-Black_HorizLogo.png" id="giphy-logo-badge" />
 			</a>
-
 		</footer>
 	</body>
 </html>
