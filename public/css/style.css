@@ -14,6 +14,16 @@ button {
 	cursor: pointer;
 }
 
+nav {
+	background-color: rgba(0, 0, 0, .2);
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+nav h2 {
+	margin: 0;
+}
+
 .grid {
  	margin: 10px auto;
 }
@@ -36,4 +46,3 @@ button {
 #main-content {
 	margin: 0 10px;
 }
-
