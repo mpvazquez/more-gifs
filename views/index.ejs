@@ -26,25 +26,29 @@
 			</a>
 		</header>
 			
-		<div id="search-input-container">
+		<section id="search-input-container">
 			<span>STEP 1: <i class="em em-point_right"></i>&nbsp; </span>
 			<input id="search-input" type="text" placeholder=" Enter GIF Keyword" />
 			<button id="search-button" value="Go">
 				<span>GO<i class="em em-mag_right"></i></span>
 			</button>
-		</div>
+		</section>
 
 		<% if (synonyms) { %>
 			<% include ./search %>
 		<% }; %>
 
-		<div class="grid">
-			<% gifs.forEach(function (gif) { %>
-				<a href="<%= gif.url %>" target="_blank">
-					<img alt="<%= gif.title %>" class="grid-item" src="<%= gif.image  %>" />
-				</a>
-			<% }); %>
-		</div>
+		<section>
+			<div class="grid">
+				<% gifs.forEach(function (gif) { %>
+					<a href="<%= gif.url %>" target="_blank">
+						<img alt="<%= gif.title %>" class="grid-item" src="<%= gif.image  %>" />
+					</a>
+				<% }); %>
+			</div>
+
+			<button>MORE</button>
+		</section>
 
 		<footer>
 			<p>This website was created by <a href="http://www.marcopvazquez.com/" target="_blank">Marco Pretell-Vázquez</a></p>
