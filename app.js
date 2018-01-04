@@ -35,7 +35,7 @@
 
 		url += (apiKey + apiLimit + apiOffset + apiQuery);
 
-		return request(url, handleRequest);
+		return request(url, handleResponse);
 	}
 
 	function getSynonyms(search) {
@@ -44,62 +44,57 @@
 
 		url += BIG_HUGE_LABS_THESAURUS_API_KEY + '/' + search + '/' + format;
 
-		return request(url, handleRequest);
+		return request(url, handleResponse);
 	}
 
 	function handleError(error) {
 		console.error(error);
 	}
 
-	function handleRequest(error, response, body) {
+	function handleResponse(error, response, body) {
 		if (error) {
 			handleError(error);
 		}
 		return response;
 	}
 
-	function parseGifJSON(data) {
-		var gifs = [];
-		var json = JSON.parse(data);
-
-		for (var i = 0; i < json.data.length; i++) {
-			gifs.push({
-				image: json.data[i].images.fixed_width.url,
-				title: json.data[i].title,
-				url: json.data[i].url
-			});
-		}
-
-		return gifs;
-	}
-
-	function parseSynonyms(data) {
-		var synonyms = [];
+	function parseApiResponse(response) {
+		var data = [];
 
 		try {
-			var apiData = JSON.parse(data);
+			var json = JSON.parse(response);
 
-			for (var key in apiData) {
-				var synonymsList = apiData[key].syn;
-				synonyms = synonyms.concat(synonymsList);
+			if (json.data) {
+				for (var i = 0; i < json.data.length; i++) {
+					data.push({
+						image: json.data[i].images.fixed_width.url,
+						title: json.data[i].title,
+						url: json.data[i].url
+					});
+				}
+			} else {
+				for (var key in json) {
+					var synonymsList = json[key].syn;
+					data = data.concat(synonymsList);
+				}
 			}
 		} catch (error) {
 			handleError(error);
 		}
 
-		return synonyms;
+		return data;
 	}
 
-	function renderPage(req, res) {
+	function render(req, res) {
 		var search = req.params.search || null;
 		var synonyms = null;
 
-		function renderGifs() {
+		function renderPage() {
 			getGifs(search, QUERY_LIMIT)
 				.catch(handleError)
-				.then(function(data) {
+				.then(function(response) {
 					res.render('index.ejs', {
-						gifs: parseGifJSON(data),
+						gifs: parseApiResponse(response),
 						search: search,
 						synonyms: synonyms
 					});
@@ -111,32 +106,36 @@
 
 			getSynonyms(search)
 				.catch(handleError)
-				.then(function(data) {
-					synonyms = parseSynonyms(data);
+				.then(function(response) {
+					synonyms = parseApiResponse(response);
 
-					renderGifs();
+					renderPage();
 				});
 		} else {
-			renderGifs();
+			renderPage();
 		}
 	}
 
-	app.use(express.static('public'));
-
-	app.get('/', renderPage);
-
-	app.get('/search/:search', renderPage);
-
-	app.get('/more', function(req, res) {
+	function returnApiData(req, res) {
 		var offset = req.query.offset;
 		var query = req.query.query;
 
 		getGifs(query, QUERY_LIMIT, offset)
 			.catch(handleError)
-			.then(function(data) {
-				res.json(parseGifJSON(data));
+			.then(function(response) {
+				var json = parseApiResponse(response);
+
+				res.json(json);
 			});
-	});
+	}
+
+	app.use(express.static('public'));
+
+	app.get('/', render);
+
+	app.get('/get', returnApiData);
+
+	app.get('/search/:search', render);
 
 	app.get('/*', function(req, res) {
 	  res.status(404).render('404.ejs');
