@@ -32,17 +32,6 @@
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
 
-		window.addEventListener('load', function() {
-			var gridElement = document.querySelector('.grid');
-
-			var masonry = new Masonry(gridElement, {
-				columnWidth: 250,
-				fitWidth: true,
-				gutter: 2,
-				itemSelector: '.grid-item'
-			});
-		});
-
 		function searchEvent() {
 			var searchValue = searchInput.value || searchPath;
 
@@ -59,6 +48,17 @@
 			if (enterKeyCode) {
 				searchEvent();
 			}
+		});
+
+		window.addEventListener('load', function() {
+			var gridElement = document.querySelector('.grid');
+
+			var masonry = new Masonry(gridElement, {
+				columnWidth: 250,
+				fitWidth: true,
+				gutter: 2,
+				itemSelector: '.grid-item'
+			});
 		});
 	}
 
