@@ -31,7 +31,7 @@
 	}
 
 	function setEventListeners(searchPath) {
-		var moreButton = document.getElementById('more-button');
+		var getButton = document.getElementById('get-button');
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
 
@@ -43,11 +43,11 @@
 			}
 		}
 
-		moreButton.addEventListener('click', function(event) {
+		getButton.addEventListener('click', function(event) {
 			offset += 40;
 
 			var xhr = new XMLHttpRequest();
-			var url = '/more?offset=' + offset;
+			var url = '/get?offset=' + offset;
 
 			if (searchPath) {
 				url += '&query=' + searchPath;

@@ -39,16 +39,10 @@
 		<% }; %>
 
 		<section>
-			<div class="grid">
-				<% gifs.forEach(function (gif) { %>
-				<a href="<%= gif.url %>" target="_blank">
-					<img alt="<%= gif.title %>" class="grid-item" src="<%= gif.image  %>" />
-				</a>
-				<% }); %>
-			</div>
+			<% include ./gifs %>
 
-			<button id="more-button">
-				<span>MORE </span>
+			<button id="get-button">
+				<span>LOAD MORE</span>
 				<i class="em em-mag_right"></i>
 			</button>
 		</section>
