@@ -4,6 +4,7 @@
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 		<link rel="stylesheet" href="/css/normalize.css"/>
 		<link rel="stylesheet" href="/css/style.css" />
+		<link rel="shortcut icon" href="https://afeld.github.io/emoji-css/public/favicon.ico">
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript" src="/js/scripts.js"></script>
@@ -14,14 +15,15 @@
 		<div id="main-content">
 			<nav>
 				<a href="/">
-					<h2>MORE GIFs: <em>Expand your GIF journey</em></h2>
+					<h2><i class="em em-mostly_sunny"></i> MORE GIFs: <em>Expand your GIF journey</em></h2>
 				</a>
 			</nav>
 
-			<span>STEP 1: <i class="em em-point_right"></i>&nbsp; </span><input id="search-input" type="text" placeholder=" Enter GIF Keyword" />
-			<input id="search-button" type="button" value="GO" />
-
-			<hr />
+			<div id="search-input-container">
+				<span>STEP 1: <i class="em em-point_right"></i>&nbsp; </span>
+				<input id="search-input" type="text" placeholder=" Enter GIF Keyword" />
+				<button id="search-button" value="Go">GO<i class="em em-mag_right"></i></i></button>
+			</div>
 
 			<% if (synonyms) { %>
 				<% include ./search %>

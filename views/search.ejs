@@ -1,4 +1,5 @@
 <div id="search-keywords">
+	<hr />
 	<% if (synonyms.length) { %>
 	<div id="related-terms">
 		<p>STEP 2: <i class="em em-point_right"></i>&nbsp; Explore Related Search Terms</p>
@@ -6,7 +7,7 @@
 			<% synonyms.forEach(function(synonym) { %>
 				<% if (synonym) { %>
 					<a class="search-tag" href="/search/<%= synonym.replace(/ /g, '+') %>">
-						<button><%= synonym %></button>
+						<button><i class="em em-link"></i> <%= synonym %></button>
 					</a>
 				<% }; %>
 			<% }); %>
@@ -17,9 +18,7 @@
 	<% }; %>
 
 	<div id="search-history">
-		<p><i class="em em-page_facing_up"></i> Search History</p>
+		<p><i class="em em-clipboard"></i> Search History</p>
 		<div id="search-history-container"></div>
-
-		<hr />
 	</div>
 </div>

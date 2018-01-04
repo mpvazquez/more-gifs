@@ -6,16 +6,24 @@
 
 		if (historyContainer) {
 			searchHistory.forEach(function(searchItem) {
-				var aTag = document.createElement('a');
+				var anchor = document.createElement('a');
 				var button = document.createElement('button');
-				
-				button.textContent = searchItem;
-				aTag.setAttribute('href', '/search/' + searchItem.replace(/ /g, '+'));
-				aTag.setAttribute('class', 'search-tag');
-				aTag.appendChild(button);
+				var icon = document.createElement('i');
+				var space = document.createTextNode(' ');
+				var span = document.createElement('span');
 
-				historyContainer.appendChild(aTag);
-				historyContainer.appendChild(document.createTextNode(' '));
+				icon.setAttribute('class', 'em em-pencil2');
+				span.textContent = ' ' + searchItem;
+
+				button.appendChild(icon);
+				button.appendChild(span);
+
+				anchor.setAttribute('href', '/search/' + searchItem.replace(/ /g, '+'));
+				anchor.setAttribute('class', 'search-tag');
+				anchor.appendChild(button);
+
+				historyContainer.appendChild(anchor);
+				historyContainer.appendChild(space);
 			});
 		}
 	}
