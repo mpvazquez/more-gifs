@@ -57,10 +57,8 @@
 			xhr.responseType = 'text';
 			xhr.onreadystatechange = function() {
 				if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-				    console.log(xhr.responseText);
-				    console.log('?????');
-				  }
-				  console.log('????2')
+					console.log(xhr.responseText);
+				}
 			}
 			xhr.send();
 		});

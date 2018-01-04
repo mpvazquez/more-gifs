@@ -58,6 +58,21 @@
 		return response;
 	}
 
+	function parseGifJSON(data) {
+		var gifs = [];
+		var json = JSON.parse(data);
+
+		for (var i = 0; i < json.data.length; i++) {
+			gifs.push({
+				image: json.data[i].images.fixed_width.url,
+				title: json.data[i].title,
+				url: json.data[i].url
+			});
+		}
+
+		return gifs;
+	}
+
 	function parseSynonyms(data) {
 		var synonyms = [];
 
@@ -76,26 +91,19 @@
 	}
 
 	function renderPage(req, res) {
-		var gifs = [];
 		var search = req.params.search || null;
 		var synonyms = null;
 
-		function parseGifJSON(data) {
-			var apiData = JSON.parse(data);
-
-			for (var i = 0; i < apiData.data.length; i++) {
-				gifs.push({
-					image: apiData.data[i].images.fixed_width.url,
-					title: apiData.data[i].title,
-					url: apiData.data[i].url
+		function renderGifs() {
+			getGifs(search, QUERY_LIMIT)
+				.catch(handleError)
+				.then(function(data) {
+					res.render('index.ejs', {
+						gifs: parseGifJSON(data),
+						search: search,
+						synonyms: synonyms
+					});
 				});
-			}
-
-			res.render('index.ejs', {
-				gifs: gifs,
-				search: search,
-				synonyms: synonyms
-			});
 		}
 
 		if (search) {
@@ -106,14 +114,10 @@
 				.then(function(data) {
 					synonyms = parseSynonyms(data);
 
-					getGifs(search, QUERY_LIMIT)
-						.catch(handleError)
-						.then(parseGifJSON);
+					renderGifs();
 				});
 		} else {
-			getGifs(search, QUERY_LIMIT)
-				.catch(handleError)
-				.then(parseGifJSON);
+			renderGifs();
 		}
 	}
 
@@ -130,7 +134,7 @@
 		getGifs(query, QUERY_LIMIT, offset)
 			.catch(handleError)
 			.then(function(data) {
-				res.json(JSON.parse(data));
+				res.json(parseGifJSON(data));
 			});
 	});
 
