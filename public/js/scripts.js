@@ -33,8 +33,6 @@
 				gutter: 2,
 				itemSelector: '.grid-item'
 			});
-
-			masonry.layout();
 		});
 
 		function searchEvent() {
