@@ -117,10 +117,11 @@
 	}
 
 	function returnApiData(req, res) {
+		var limit = req.query.limit;
 		var offset = req.query.offset;
 		var query = req.query.query;
 
-		getGifs(query, QUERY_LIMIT, offset)
+		getGifs(query, limit, offset)
 			.catch(handleError)
 			.then(function(response) {
 				var json = parseApiResponse(response);
