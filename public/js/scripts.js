@@ -1,13 +1,15 @@
 (function() {
 	'use strict';
 
-	var offset = 0;
+	var API_LIMIT = 20;
+	var masonry;
+	var offset = null;
 	var searchPath = null;
 
 	function initMasonry() {
 		var gridElement = document.querySelector('.grid');
 
-		var masonry = new Masonry(gridElement, {
+		masonry = new Masonry(gridElement, {
 			columnWidth: 250,
 			fitWidth: true,
 			gutter: 2,
@@ -18,10 +20,14 @@
 	function makeRequest(event) {
 		event.preventDefault();
 
-		offset += 40;
+		if (offset) {
+			offset += API_LIMIT;
+		} else {
+			offset = 40;
+		}
 
 		var xhr = new XMLHttpRequest();
-		var url = '/get?offset=' + offset;
+		var url = '/get?offset=' + offset + '&limit=' + API_LIMIT;
 
 		if (searchPath) {
 			url += '&query=' + searchPath;
@@ -31,10 +37,41 @@
 		xhr.responseType = 'text';
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-				console.log(xhr.responseText);
+				renderMoreGifs(xhr.responseText);
 			}
 		}
 		xhr.send();
+	}
+
+	function renderMoreGifs(data) {
+		try {
+			var json = JSON.parse(data);
+			var gridContainer = document.querySelector('.grid');
+
+			json.forEach(function(gif) {
+				var anchor = document.createElement('a');
+				var img = document.createElement('img');
+
+				anchor.setAttribute('href', gif.url);
+				anchor.setAttribute('target', '_blank');
+
+				img.setAttribute('alt', gif.title);
+				img.setAttribute('class', 'grid-item');
+				img.setAttribute('src', gif.image);
+
+				anchor.appendChild(img);
+
+				gridContainer.appendChild(anchor);
+
+				masonry.appended(img);
+
+				img.onload = function() {
+					masonry.layout();
+				}
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	function renderSearchHistory(searchHistory) {
