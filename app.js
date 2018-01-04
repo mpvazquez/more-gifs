@@ -7,14 +7,15 @@
 	var BIG_HUGE_LABS_THESAURUS_API_KEY = process.env.BIG_HUGE_LABS_THESAURUS_API_KEY;
 	var GIPHY_API_KEY = process.env.GIPHY_API_KEY;
 	var PORT = process.env.PORT || 8080;
+	var QUERY_LIMIT = 40;
 
 	var app = express();
 
 	function getGifs(search, limit, offset) {
 		var apiKey = 'api_key=' + GIPHY_API_KEY;
 		var apiLimit = '';
-		var offset = '';
-		var query = '';
+		var apiOffset = '';
+		var apiQuery = '';
 		var url = 'http://api.giphy.com/v1/gifs';
 
 		if (limit) {
@@ -22,17 +23,17 @@
 		}
 
 		if (offset) {
-			offset = '&offset=' + offset;
+			apiOffset = '&offset=' + offset;
 		}
 
 		if (search) {
 			url += '/search?';
-			query = '&q=' + search;
+			apiQuery = '&q=' + search;
 		} else {
 			url += '/trending?';
 		}
 
-		url += (apiKey + apiLimit + offset + query);
+		url += (apiKey + apiLimit + apiOffset + apiQuery);
 
 		return request(url, handleRequest);
 	}
@@ -76,12 +77,10 @@
 
 	function renderPage(req, res) {
 		var gifs = [];
-		var limit = 40;
-		var offset = 0;
 		var search = req.params.search || null;
 		var synonyms = null;
 
-		function renderGifs(data) {
+		function parseGifJSON(data) {
 			var apiData = JSON.parse(data);
 
 			for (var i = 0; i < apiData.data.length; i++) {
@@ -107,14 +106,14 @@
 				.then(function(data) {
 					synonyms = parseSynonyms(data);
 
-					getGifs(search, limit)
+					getGifs(search, QUERY_LIMIT)
 						.catch(handleError)
-						.then(renderGifs);
+						.then(parseGifJSON);
 				});
 		} else {
-			getGifs(search, limit)
+			getGifs(search, QUERY_LIMIT)
 				.catch(handleError)
-				.then(renderGifs);
+				.then(parseGifJSON);
 		}
 	}
 
@@ -123,6 +122,17 @@
 	app.get('/', renderPage);
 
 	app.get('/search/:search', renderPage);
+
+	app.get('/more', function(req, res) {
+		var offset = req.query.offset;
+		var query = req.query.query;
+
+		getGifs(query, QUERY_LIMIT, offset)
+			.catch(handleError)
+			.then(function(data) {
+				res.json(JSON.parse(data));
+			});
+	});
 
 	app.get('/*', function(req, res) {
 	  res.status(404).render('404.ejs');

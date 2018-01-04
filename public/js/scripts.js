@@ -1,6 +1,8 @@
 (function() {
 	'use strict';
 
+	var offset = 0;
+
 	function renderSearchHistory(searchHistory) {
 		var historyContainer = document.getElementById('search-history-container');
 
@@ -29,6 +31,7 @@
 	}
 
 	function setEventListeners(searchPath) {
+		var moreButton = document.getElementById('more-button');
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
 
@@ -39,6 +42,28 @@
 				document.location = '/search/' + searchValue.replace(/ /g, '+');
 			}
 		}
+
+		moreButton.addEventListener('click', function(event) {
+			offset += 40;
+
+			var xhr = new XMLHttpRequest();
+			var url = '/more?offset=' + offset;
+
+			if (searchPath) {
+				url += '&query=' + searchPath;
+			}
+
+			xhr.open('GET', url, true);
+			xhr.responseType = 'text';
+			xhr.onreadystatechange = function() {
+				if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+				    console.log(xhr.responseText);
+				    console.log('?????');
+				  }
+				  console.log('????2')
+			}
+			xhr.send();
+		});
 
 		searchButton.addEventListener('click', searchEvent);
 
