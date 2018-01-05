@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	var API_LIMIT = 60;
+	var API_LIMIT = 25;
 	var masonry;
-	var offset = null;
+	var offset = 0;
 	var searchPath = null;
 
 	function initMasonry() {
@@ -17,14 +17,10 @@
 		});
 	}
 
-	function makeRequest(event) {
+	function loadMoreRequest(event) {
 		event.preventDefault();
 
-		if (offset) {
-			offset += API_LIMIT;
-		} else {
-			offset = 40;
-		}
+		offset += API_LIMIT;
 
 		var xhr = new XMLHttpRequest();
 		var url = '/get?offset=' + offset + '&limit=' + API_LIMIT;
@@ -82,7 +78,6 @@
 				var anchor = document.createElement('a');
 				var button = document.createElement('button');
 				var icon = document.createElement('i');
-				var space = document.createTextNode(' ');
 				var span = document.createElement('span');
 
 				icon.setAttribute('class', 'em em-pencil2');
@@ -96,7 +91,7 @@
 				anchor.appendChild(button);
 
 				historyContainer.appendChild(anchor);
-				historyContainer.appendChild(space);
+				historyContainer.appendChild(document.createTextNode(' '));
 			});
 		}
 	}
@@ -106,7 +101,7 @@
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
 
-		function searchEvent() {
+		function newSearch() {
 			var searchValue = searchInput.value || searchPath;
 
 			if (searchValue) {
@@ -114,15 +109,15 @@
 			}
 		}
 
-		loadMoreButton.addEventListener('click', makeRequest);
+		loadMoreButton.addEventListener('click', loadMoreRequest);
 
-		searchButton.addEventListener('click', searchEvent);
+		searchButton.addEventListener('click', newSearch);
 
 		searchInput.addEventListener('keydown', function(event) {
 			var enterKeyCode = event.keyCode === 13;
 
 			if (enterKeyCode) {
-				searchEvent();
+				newSearch();
 			}
 		});
 
@@ -154,7 +149,7 @@
 		} else {
 			document.getElementById('search-history').remove();
 
-			console.error('Sorry, local web storage storage is not supported on your browser!');
+			console.error('Sorry, local web storage is not supported on your browser!');
 		}
 	});
 

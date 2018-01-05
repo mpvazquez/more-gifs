@@ -9,7 +9,7 @@
 	var parseApiResponse = require('./helpers/parse-api-response.js');
 
 	var PORT = process.env.PORT || 8080;
-	var QUERY_LIMIT = 40;
+	var QUERY_LIMIT = 25;
 
 	var app = express();
 
