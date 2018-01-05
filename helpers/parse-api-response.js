@@ -16,8 +16,8 @@ var parseApiResponse = function(response) {
 			}
 		} else {
 			for (var key in json) {
-				var synonymsList = json[key].syn;
-				data = data.concat(synonymsList);
+				var synonymList = json[key].syn;
+				data = data.concat(synonymList);
 			}
 		}
 	} catch (error) {
