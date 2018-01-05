@@ -10,7 +10,7 @@
 		var gridElement = document.querySelector('.grid');
 
 		masonry = new Masonry(gridElement, {
-			columnWidth: 250,
+			columnWidth: 225,
 			fitWidth: true,
 			gutter: 2,
 			itemSelector: '.grid-item'

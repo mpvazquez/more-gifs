@@ -70,7 +70,7 @@ h2 {
 .grid-item {
 	margin-bottom: 2px;
 	vertical-align: top;
-	width: 250px;
+	width: 225px;
 }
 
 .search-tag > button {
@@ -84,4 +84,8 @@ h2 {
 
 #search-input-container {
 	margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+
 }
