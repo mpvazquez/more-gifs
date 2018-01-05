@@ -28,4 +28,4 @@
 
 ---
 
-Created by [MARCO PRETELL-VÁZQUEZ](http://www.marcopvazquez.com/)
+Created by [MARCO PRETELL-VÁZQUEZ](http://www.marcopvazquez.com/){:target="_blank"}
