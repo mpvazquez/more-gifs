@@ -45,8 +45,8 @@
 	}
 
 	function returnApiData(req, res) {
-		var limit = req.query.limit;
-		var offset = req.query.offset;
+		var limit = req.query.limit || QUERY_LIMIT;
+		var offset = req.query.offset || 0;
 		var query = req.query.query;
 
 		giphyAPI(query, limit, offset)
