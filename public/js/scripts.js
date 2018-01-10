@@ -1,16 +1,16 @@
 (function() {
 	'use strict';
 
-	var API_LIMIT = 25;
 	var masonry;
 	var offset = 0;
 	var searchPath = null;
+
+	var API_LIMIT = 25;
 
 	function initMasonry() {
 		var gridElement = document.querySelector('.grid');
 
 		masonry = new Masonry(gridElement, {
-			columnWidth: 225,
 			fitWidth: true,
 			gutter: 2,
 			itemSelector: '.grid-item'

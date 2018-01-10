@@ -87,5 +87,7 @@ h2 {
 }
 
 @media (max-width: 768px) {
-
+    .grid-item {
+        width: 150px;
+    }
 }
