@@ -1,9 +1,7 @@
 <section id="search-keywords">
-	<hr />
-
 	<% if (synonyms.length) { %>
 	<div id="related-terms">
-		<p>STEP 2: <i class="em em-point_right"></i>&nbsp; Explore Related Search Terms</p>
+		<p>STEP 2: <i class="em em-point_down"></i>&nbsp; Explore Related Search Terms</p>
 		<div id="search-synonyms">
 			<% synonyms.forEach(function(synonym) { %>
 				<% if (synonym) { %>
@@ -13,8 +11,6 @@
 				<% }; %>
 			<% }); %>
 		</div>
-
-		<hr />
 	</div>
 	<% }; %>
 
