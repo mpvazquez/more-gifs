@@ -5,22 +5,22 @@ a {
 
 body {
 	background: rgb(139, 61, 184);
-    background: -moz-linear-gradient(30deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
-    background: -webkit-linear-gradient(30deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
-    background: -o-linear-gradient(30deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
-    background: -ms-linear-gradient(30deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
+    background: -moz-linear-gradient(330deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
+    background: -webkit-linear-gradient(330deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
+    background: -o-linear-gradient(330deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
+    background: -ms-linear-gradient(330deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
     background: linear-gradient(120deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
 	color: #FFFFFF;
-	text-align: center;
 	font-family: sans-serif;
+    text-align: center;
 }
 
 button {
-    cursor: pointer;
-    color: rgb(96,96,96);
     border: 0;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
+    color: rgb(96,96,96);
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
     border-radius: 5px;
     background: rgb(232,232,232);
     background: -moz-linear-gradient(0deg, rgb(200,200,200) 30%, rgb(232,232,232) 70%);
@@ -35,24 +35,23 @@ button {
 }
 
 footer {
-    box-shadow: 0px -5px 5px 0px rgba(50, 50, 50, 0.75);
     -webkit-box-shadow: 0px -5px 5px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 0px -5px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 0px -5px 5px 0px rgba(50, 50, 50, 0.75);
     margin-top: 1rem;
-    padding: .3rem;
 }
 
 header {
-    box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.75);
     -webkit-box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.75);
     margin-bottom: 1rem;
-    padding: .5rem;
-    text-shadow: 0px 2px 2px rgba(0, 0, 0, 1);
 }
 
 header, footer {
     background-color: rgba(0, 0, 0, .2);
+    padding: .3rem;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 1);
 }
 
 h1, h4 {
@@ -80,10 +79,12 @@ h1, h4 {
 
 .tag-container {
     background: rgba(250, 250, 250, .2);
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
     border-radius: 1rem;
-    box-shadow: inset 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
     -webkit-box-shadow: inset 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: inset 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: inset 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
     margin: 1rem;
     max-height: 20rem;
     overflow: scroll;
@@ -91,16 +92,17 @@ h1, h4 {
 }
 
 #gif-404 {
-	height: 100%;
-	width: 100%;
+	width: 90%;
 }
 
 #search-input {
-    border-radius: 5px;
     border: 0;
-    box-shadow: 0px 2px 1px rgba(50, 50, 50, 0.75);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
     -webkit-box-shadow: 0px 2px 1px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 0px 2px 1px rgba(50, 50, 50, 0.75);
+    box-shadow: 0px 2px 1px rgba(50, 50, 50, 0.75);
     padding: 5px 3px 4px 3px;
 }
 
