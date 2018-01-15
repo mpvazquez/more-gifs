@@ -38,14 +38,12 @@ footer {
     -webkit-box-shadow: 0px -5px 5px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 0px -5px 5px 0px rgba(50, 50, 50, 0.75);
     box-shadow: 0px -5px 5px 0px rgba(50, 50, 50, 0.75);
-    margin-top: 1rem;
 }
 
 header {
     -webkit-box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.75);
     box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.75);
-    margin-bottom: 1rem;
 }
 
 header, footer {
@@ -100,6 +98,10 @@ h1, h4 {
     background: linear-gradient(90deg, rgb(139, 61, 184) 30%, rgb(90, 140, 250) 70%);
 }
 
+#get-button {
+    margin: 2rem 0;
+}
+
 #gif-404 {
 	width: 90%;
 }
@@ -130,10 +132,18 @@ h1, h4 {
     .grid-item {
         width: 150px;
     }
+
+    .home-button {
+        margin: 3rem;
+    }
 }
 
 @media (max-width: 480px) {
     .grid-item {
         width: 100px;
+    }
+
+    .home-button {
+        margin: 4.5rem;
     }
 }
