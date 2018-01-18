@@ -17,7 +17,7 @@
 		});
 	}
 
-	function loadMoreRequest(event) {
+	function loadMoreGifs(event) {
 		event.preventDefault();
 
 		offset += API_LIMIT;
@@ -51,8 +51,8 @@
 				anchor.setAttribute('href', gif.url);
 				anchor.setAttribute('target', '_blank');
 
+				img.classList.add('grid-item');
 				img.setAttribute('alt', gif.title);
-				img.setAttribute('class', 'grid-item');
 				img.setAttribute('src', gif.image);
 
 				anchor.appendChild(img);
@@ -83,11 +83,11 @@
 				icon.setAttribute('class', 'em em-pencil2');
 				span.textContent = ' ' + searchItem;
 
+				button.classList.add('search-tag');
 				button.appendChild(icon);
 				button.appendChild(span);
 
 				anchor.setAttribute('href', '/search/' + searchItem.replace(/ /g, '+'));
-				anchor.setAttribute('class', 'search-tag');
 				anchor.appendChild(button);
 
 				historyContainer.appendChild(anchor);
@@ -97,7 +97,7 @@
 	}
 
 	function setEventListeners() {
-		var loadMoreButton = document.getElementById('get-button');
+		var loadMoreButton = document.getElementById('load-more-button');
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
 
@@ -109,7 +109,7 @@
 			}
 		}
 
-		loadMoreButton.addEventListener('click', loadMoreRequest);
+		loadMoreButton.addEventListener('click', loadMoreGifs);
 
 		searchButton.addEventListener('click', newSearch);
 
