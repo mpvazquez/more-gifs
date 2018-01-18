@@ -140,7 +140,7 @@
 		searchPath = document.location.pathname.split('/')[2];
 
 		if (searchPath) {
-			document.getElementById('search-input').placeholder = searchPath;
+			document.getElementById('search-input').placeholder = 'Viewing: ' + searchPath.replace(/\+/g, ' ');
 		}
 
 		setEventListeners();
