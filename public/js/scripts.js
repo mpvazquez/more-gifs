@@ -139,6 +139,10 @@
 	document.addEventListener("DOMContentLoaded", function() {
 		searchPath = document.location.pathname.split('/')[2];
 
+		if (searchPath) {
+			document.getElementById('search-input').placeholder = searchPath;
+		}
+
 		setEventListeners();
 
 		if (typeof Storage !== undefined) {
