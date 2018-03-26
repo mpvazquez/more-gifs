@@ -2,10 +2,11 @@
 	"dependencies": {
 		"ejs": "^2.5.7",
 		"express": "^4.16.2",
+		"react": "^16.2.0",
 		"request": "^2.83.0",
 		"request-promise": "^4.2.2"
 	},
 	"scripts": {
-		"start": "npm install && node app.js"
+		"start": "npm install && node server.js"
 	}
 }
