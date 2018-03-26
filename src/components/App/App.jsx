@@ -6,13 +6,14 @@ import GifList from 'components/GifList/GifList';
 import Header from 'components/Header/Header';
 import SearchSection from 'components/SearchSection/SearchSection';
 
-class Page extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       gifs: [],
-      search: null
+      search: null,
+      synonyms: []
     }
   }
 
@@ -25,15 +26,17 @@ class Page extends React.Component {
   }
 
   render() {
+    const { gifs, synonyms } = this.state;
+
     return (
       <div className="page-wrapper">
         <Header />
-        <SearchSection />
-        <GifList gifs={this.state.gifs} />
+        <SearchSection synonyms={synonyms} />
+        <GifList gifs={gifs} />
         <Footer />
       </div>
     );
   }
 }
 
-export default Page;
+export default App;

@@ -1,9 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const SearchSection = () => {
+import SearchInput from '../SearchInput/SearchInput';
+import SearchSynonymList from '../SearchSynonymList/SearchSynonymList';
+
+const SearchSection = ({ synonyms }) => {
   return (
-    <div>SearchSection</div>
+    <div>
+      <SearchInput />
+      <SearchSynonymList synonyms={synonyms} />
+    </div>
   );
 }
+SearchSection.propTypes = {
+  synonyms: PropTypes.array
+}
+
 
 export default SearchSection;
