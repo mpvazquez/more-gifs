@@ -54,22 +54,6 @@ button {
   padding: 5px 10px 4px 10px;
 }
 
-footer {
-  -webkit-box-shadow: var(--footer-box-shadow);
-	  box-shadow: var(--footer-box-shadow);
-}
-
-header {
-  -webkit-box-shadow: var(--header-box-shadow);
-	  box-shadow: var(--header-box-shadow);
-}
-
-header, footer {
-  background-color: var(--transparent-gray-light);
-  padding: .3rem;
-  text-shadow: var(--text-shadow);
-}
-
 h1, h4 {
 	margin: 0;
 }
@@ -78,16 +62,6 @@ h1, h4 {
 	height: 1.2rem;
   margin-top: -3px;
   width: 1.2rem;
-}
-
-.grid {
- 	margin: 10px auto;
-}
-
-.grid-item {
-	margin-bottom: 2px;
-	vertical-align: top;
-	width: 225px;
 }
 
 .search-tag {

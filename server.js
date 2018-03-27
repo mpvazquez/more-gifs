@@ -3,10 +3,10 @@
 
 	var express = require('express');
 
-	var bigHugeLabsAPI = require('../helpers/big-huge-labs-api.js');
-	var giphyAPI = require('../helpers/giphy-api.js');
-	var handleError = require('../helpers/handle-api-error');
-	var parseApiResponse = require('../helpers/parse-api-response.js');
+	var bigHugeLabsAPI = require('./helpers/big-huge-labs-api.js');
+	var giphyAPI = require('./helpers/giphy-api.js');
+	var handleError = require('./helpers/handle-api-error');
+	var parseApiResponse = require('./helpers/parse-api-response.js');
 
 	var PORT = process.env.PORT || 8080;
 	var QUERY_LIMIT = 25;
@@ -59,7 +59,7 @@
 	}
 
 	app.use(express.static('dist'));
-	app.use(express.static('src/assets'));
+	app.use(express.static('src/static'));
 
 	app.get('/', render);
 	app.get('/get', returnApiData);

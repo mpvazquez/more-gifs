@@ -1,6 +1,7 @@
 {
 	"dependencies": {
 		"axios": "^0.18.0",
+		"classnames": "^2.2.5",
 		"ejs": "^2.5.7",
 		"express": "^4.16.2",
 		"prop-types": "^15.6.1",
@@ -11,7 +12,7 @@
 	},
 	"scripts": {
 		"build": "rm -rf /node_modules && npm install && webpack --display-error-details",
-		"start": "npm run build && node server/index.js"
+		"start": "npm run build && node server.js"
 	},
 	"devDependencies": {
 		"ajv": "^6.4.0",

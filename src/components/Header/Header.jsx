@@ -1,11 +1,13 @@
 import React from 'react';
 
+import styles from './Header.pcss';
+
 const Header = () => {
   return (
-    <header>
+    <header className={styles.headerContainer}>
 			<a href="/">
 				<h1>
-					<i class="em em-mostly_sunny"></i>
+					<i className="em em-mostly_sunny"></i>
 					<span> MORE GIFs</span>
 				</h1>
 				<h4><em>Expand Your GIF Journey</em></h4>

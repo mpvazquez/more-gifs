@@ -1,9 +1,11 @@
 import React from 'react';
 
+import styles from './Footer.pcss';
+
 const Footer = () => {
   const copy = 'This website was created by Marco Pretell-Vázquez';
   return (
-    <footer>
+    <footer className={styles.footerContainer}>
 			<p>
         <a href="http://www.marcopvazquez.com/"
           target="_blank"
