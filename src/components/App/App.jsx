@@ -37,7 +37,7 @@ class App extends React.Component {
       <div className={styles.appContainer}>
         <Header />
 
-        <div>
+        <section>
           <SearchInput onSubmitSearch={this.onSubmitSearch}
             search={search}
           />
@@ -47,9 +47,9 @@ class App extends React.Component {
           <SearchHistoryList history={history}
             onClickTag={this.onClickTag}
           />
-        </div>
+        </section>
 
-        <div>
+        <section>
           <GifList gifs={gifs} />
 
           <button id="load-more-button"
@@ -57,7 +57,7 @@ class App extends React.Component {
           >
     				<span>MORE<i className="em em-mag_right"></i></span>
     			</button>
-        </div>
+        </section>
 
         <Footer />
       </div>

@@ -28,7 +28,7 @@
 	}
 
 	function returnSynonymData(req, res) {
-		var query = req.query.query.replace(/\+/g, ' ');
+		var query = req.query.query;
 
 		bigHugeLabsAPI(query)
 			.catch(handleError)
