@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SearchHistoryList = ({ history }) => {
+const SearchHistoryList = ({ history, onClickTag }) => {
+  if (!history.length) return null;
+
   return (
     <div id="search-history">
       <p><i className="em em-clipboard"></i> Search History</p>
@@ -10,7 +12,12 @@ const SearchHistoryList = ({ history }) => {
           history.map(historyItem => {
             return (
               <a href="#">
-                <button><i className="em em-pencil2" /> {historyItem}</button>
+                <button className="search-tag"
+                  data-search={historyItem}
+                  onClick={onClickTag}
+                >
+                  <i className="em em-pencil2" /> {historyItem}
+                </button>
               </a>
             )
           })
@@ -20,7 +27,8 @@ const SearchHistoryList = ({ history }) => {
   );
 }
 SearchHistoryList.propTypes = {
-  history: PropTypes.array.isRequired
+  history: PropTypes.array.isRequired,
+  onClickTag: PropTypes.func.isRequired
 }
 
 export default SearchHistoryList;

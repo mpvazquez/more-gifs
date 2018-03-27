@@ -4,7 +4,10 @@ import axios from 'axios';
 import Footer from 'components/Footer/Footer';
 import GifList from 'components/GifList/GifList';
 import Header from 'components/Header/Header';
-import SearchSection from 'components/SearchSection/SearchSection';
+
+import SearchHistoryList from '../SearchHistoryList/SearchHistoryList';
+import SearchInput from '../SearchInput/SearchInput';
+import SearchSynonymList from '../SearchSynonymList/SearchSynonymList';
 
 import styles from './App.pcss';
 
@@ -34,13 +37,19 @@ class App extends React.Component {
       <div className={styles.appContainer}>
         <Header />
 
-        <SearchSection history={history}
-          search={search}
-          synonyms={synonyms}
-          onSubmitSearch={this.onSubmitSearch}
-        />
+        <div>
+          <SearchInput onSubmitSearch={this.onSubmitSearch}
+            search={search}
+          />
+          <SearchSynonymList synonyms={synonyms}
+            onClickTag={this.onClickTag}
+          />
+          <SearchHistoryList history={history}
+            onClickTag={this.onClickTag}
+          />
+        </div>
 
-        <div className="">
+        <div>
           <GifList gifs={gifs} />
 
           <button id="load-more-button"
@@ -55,9 +64,7 @@ class App extends React.Component {
     );
   }
 
-  getGifs = (search = '') => {
-    const { offset } = this.state;
-
+  getGifs = (search = '', offset = 0) => {
     let url = `/get-gifs?limit=${API_LIMIT}`;
 
     if (offset) {
@@ -84,19 +91,41 @@ class App extends React.Component {
     });
   }
 
+  onClickTag = event => {
+    event.preventDefault();
+
+    const { search } = event.currentTarget.dataset;
+
+    let { history } = this.state;
+
+    if (!history.includes(search)) {
+      history.push(search);
+    }
+
+    this.setState({
+      gifs: [],
+      offset: 0,
+      history,
+      search
+    });
+
+    this.getSynonyms(search);
+    this.getGifs(search);
+  }
+
   onLoadMoreClick = event => {
     event.preventDefault();
 
-    const offset = this.state.offset + API_LIMIT;
+    const { offset: currentOffset, search } = this.state;
+    const offset = currentOffset + API_LIMIT;
 
     this.setState({ offset });
 
-    this.getGifs();
+    this.getGifs(search, offset);
   }
 
   onSubmitSearch = search => {
-    const { history: currentHistory } = this.state;
-    let history = currentHistory;
+    let { history } = this.state;
 
     if (!history.includes(search)) {
       history.push(search);

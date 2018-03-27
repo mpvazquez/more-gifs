@@ -5,7 +5,7 @@ import SearchHistoryList from '../SearchHistoryList/SearchHistoryList';
 
 import styles from './SearchSynonymList.pcss';
 
-const SearchSynonymList = ({ history, synonyms }) => {
+const SearchSynonymList = ({ synonyms, onClickTag }) => {
   if (!synonyms.length) return null;
 
   return (
@@ -18,22 +18,23 @@ const SearchSynonymList = ({ history, synonyms }) => {
               if (!synonym) return null;
 
               return (
-                <a href={`/search/${ synonym.replace(/ /g, '+') }`}>
-      						<button className="search-tag"><i className="em em-link"></i> { synonym }</button>
-      					</a>
+                <button className="search-tag"
+                  data-search={synonym}
+                  onClick={onClickTag}
+                >
+                  <i className="em em-link"></i> { synonym }
+                </button>
               );
             })
           }
     		</div>
     	</div>
-
-    	<SearchHistoryList history={history} />
     </section>
   );
 }
 SearchSynonymList.propTypes = {
-  history: PropTypes.array.isRequired,
-  synonyms: PropTypes.array.isRequired
+  synonyms: PropTypes.array.isRequired,
+  onClickTag: PropTypes.func.isRequired
 }
 
 export default SearchSynonymList;
