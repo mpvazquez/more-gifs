@@ -79,29 +79,3 @@ h1, h4 {
   overflow: scroll;
   padding: .5rem;
 }
-
-#body-404 {
-  background: var(--blue);
-	  background: -webkit-linear-gradient(0deg, var(--violet) 30%, var(--blue) 70%);
-	  background: linear-gradient(90deg, var(--violet) 30%, var(--blue) 70%);
-}
-
-#load-more-button {
-  margin: 2rem 0;
-}
-
-#gif-404 {
-	width: 90%;
-}
-
-@media (max-width: 768px) {
-  .home-button {
-    margin: 3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .home-button {
-    margin: 4.5rem;
-  }
-}

@@ -53,7 +53,7 @@ class App extends React.Component {
         <section>
           <GifList gifs={gifs} />
 
-          <button id="load-more-button"
+          <button className={styles.loadMoreButton}
             onClick={this.onLoadMoreClick}
           >
             <span>MORE<i className="em em-mag_right"></i></span>
