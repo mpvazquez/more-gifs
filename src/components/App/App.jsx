@@ -16,27 +16,29 @@ class App extends React.Component {
 
     this.state = {
       gifs: [],
+      history: [],
       offset: 0,
-      search: null,
+      search: '',
       synonyms: []
     }
   }
 
   componentDidMount() {
-    axios.get('/get').then(response => {
-      this.setState({
-        gifs: response.data
-      });
-    });
+    this.getGifs();
   }
 
   render() {
-    const { gifs, synonyms } = this.state;
+    const { gifs, history, search, synonyms } = this.state;
 
     return (
-      <div className={styles.pageWrapper}>
+      <div className={styles.appContainer}>
         <Header />
-        <SearchSection synonyms={synonyms} />
+
+        <SearchSection history={history}
+          search={search}
+          synonyms={synonyms}
+          onSubmitSearch={this.onSubmitSearch}
+        />
 
         <div className="">
           <GifList gifs={gifs} />
@@ -53,18 +55,16 @@ class App extends React.Component {
     );
   }
 
-  onLoadMoreClick = event => {
-    event.preventDefault();
+  getGifs = (search = '') => {
+    const { offset } = this.state;
 
-    const { search } = this.state;
-    const offset = this.state.offset += API_LIMIT;
+    let url = `/get-gifs?limit=${API_LIMIT}`;
 
-    this.setState({ offset });
-
-    let url = '/get?offset=' + offset + '&limit=' + API_LIMIT;
-
+    if (offset) {
+      url += `&offset=${offset}`;
+    }
     if (search) {
-      url += '&query=' + search;
+      url += `&query=${search}`;
     }
 
     axios.get(url).then(response => {
@@ -72,6 +72,45 @@ class App extends React.Component {
         gifs: this.state.gifs.concat(response.data)
       });
     });
+  }
+
+  getSynonyms = (search = '') => {
+    let url = `/get-synonyms?query=${search}`;
+
+    axios.get(url).then(response => {
+      this.setState({
+        synonyms: response.data
+      });
+    });
+  }
+
+  onLoadMoreClick = event => {
+    event.preventDefault();
+
+    const offset = this.state.offset + API_LIMIT;
+
+    this.setState({ offset });
+
+    this.getGifs();
+  }
+
+  onSubmitSearch = search => {
+    const { history: currentHistory } = this.state;
+    let history = currentHistory;
+
+    if (!history.includes(search)) {
+      history.push(search);
+    }
+
+    this.setState({
+      gifs: [],
+      offset: 0,
+      history,
+      search
+    });
+
+    this.getGifs(search);
+    this.getSynonyms(search);
   }
 }
 

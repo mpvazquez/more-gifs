@@ -5,7 +5,7 @@ import SearchHistoryList from '../SearchHistoryList/SearchHistoryList';
 
 import styles from './SearchSynonymList.pcss';
 
-const SearchSynonymList = ({ synonyms }) => {
+const SearchSynonymList = ({ history, synonyms }) => {
   if (!synonyms.length) return null;
 
   return (
@@ -27,12 +27,13 @@ const SearchSynonymList = ({ synonyms }) => {
     		</div>
     	</div>
 
-    	<SearchHistoryList />
+    	<SearchHistoryList history={history} />
     </section>
   );
 }
 SearchSynonymList.propTypes = {
-  synonyms: PropTypes.array
+  history: PropTypes.array.isRequired,
+  synonyms: PropTypes.array.isRequired
 }
 
 export default SearchSynonymList;
