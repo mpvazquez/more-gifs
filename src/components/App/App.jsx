@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import Footer from 'components/Footer/Footer';
 import GifList from 'components/GifList/GifList';
@@ -31,7 +32,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { gifs, history, search, synonyms } = this.state;
+    const { children, gifs, history, search, synonyms } = this.state;
 
     return (
       <div className={styles.appContainer}>
@@ -55,8 +56,8 @@ class App extends React.Component {
           <button id="load-more-button"
             onClick={this.onLoadMoreClick}
           >
-    				<span>MORE<i className="em em-mag_right"></i></span>
-    			</button>
+            <span>MORE<i className="em em-mag_right"></i></span>
+          </button>
         </section>
 
         <Footer />
