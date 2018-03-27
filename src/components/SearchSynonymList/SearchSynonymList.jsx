@@ -13,15 +13,13 @@ const SearchSynonymList = ({ synonyms }) => {
     		<div class="tag-container" id="search-synonyms">
           {
             synonyms.map(synonym => {
-              if (synonym) {
-                return (
-                  <a href={`/search/${ synonym.replace(/ /g, '+') }`}>
-        						<button class="search-tag"><i class="em em-link"></i> { synonym }</button>
-        					</a>
-                )
-              } else {
-                return null;
-              }
+              if (!synonym) return null;
+
+              return (
+                <a href={`/search/${ synonym.replace(/ /g, '+') }`}>
+      						<button class="search-tag"><i class="em em-link"></i> { synonym }</button>
+      					</a>
+              );
             })
           }
     		</div>

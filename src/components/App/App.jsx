@@ -6,6 +6,8 @@ import GifList from 'components/GifList/GifList';
 import Header from 'components/Header/Header';
 import SearchSection from 'components/SearchSection/SearchSection';
 
+import styles from './App.pcss';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +31,7 @@ class App extends React.Component {
     const { gifs, synonyms } = this.state;
 
     return (
-      <div className="page-wrapper">
+      <div className={styles.pageWrapper}>
         <Header />
         <SearchSection synonyms={synonyms} />
         <GifList gifs={gifs} />

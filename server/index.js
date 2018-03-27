@@ -59,6 +59,7 @@
 	}
 
 	app.use(express.static('dist'));
+	app.use(express.static('src/assets'));
 
 	app.get('/', render);
 	app.get('/get', returnApiData);

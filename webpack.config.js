@@ -1,4 +1,6 @@
 const HtmlPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const path = require('path');
 
 const join = path.join;
@@ -11,7 +13,7 @@ const makePcssLoader = () => {
   return {
     test: /\.pcss$/,
     loaders: [
-      'style-loader',
+      MiniCssExtractPlugin.loader,
       'css-loader?sourceMap&modules&camelCase&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]',
       'postcss-loader',
     ],
@@ -35,6 +37,7 @@ module.exports = {
         test: /\.css$/,
         loaders: [
           'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader?localIdentName=[name]---[local]---[hash:base64:5]',
         ],
         include: path.resolve(__dirname, 'node_modules'),
@@ -85,6 +88,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'bundle.css'
+    }),
     new HtmlPlugin({
       template: 'src/assets/index.html'
     })
