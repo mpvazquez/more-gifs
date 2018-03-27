@@ -7,23 +7,15 @@ import GifItem from '../GifItem/GifItem';
 import styles from './GifList.pcss';
 
 const GifList = ({ gifs }) => {
-  const gifListClassname = classnames('grid', {
-    [styles.gifList]: true
-  });
+  const gifListClassname = classnames('grid', [styles.gifListContainer]);
 
   return (
-    <div className={styles.gifListContainer}>
-      <div className={gifListClassname}>
-        {
-          gifs.map(
-            gif => <GifItem gif={gif} />
-          )
-        }
-      </div>
-
-      <button id="load-more-button">
-				<span>MORE<i className="em em-mag_right"></i></span>
-			</button>
+    <div className={gifListClassname}>
+      {
+        gifs.map(
+          gif => <GifItem gif={gif} />
+        )
+      }
     </div>
   );
 }

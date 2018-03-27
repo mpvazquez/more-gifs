@@ -8,18 +8,21 @@ import SearchSection from 'components/SearchSection/SearchSection';
 
 import styles from './App.pcss';
 
+const API_LIMIT = 25;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       gifs: [],
+      offset: 0,
       search: null,
       synonyms: []
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     axios.get('/get').then(response => {
       this.setState({
         gifs: response.data
@@ -34,10 +37,41 @@ class App extends React.Component {
       <div className={styles.pageWrapper}>
         <Header />
         <SearchSection synonyms={synonyms} />
-        <GifList gifs={gifs} />
+
+        <div className="">
+          <GifList gifs={gifs} />
+
+          <button id="load-more-button"
+            onClick={this.onLoadMoreClick}
+          >
+    				<span>MORE<i className="em em-mag_right"></i></span>
+    			</button>
+        </div>
+
         <Footer />
       </div>
     );
+  }
+
+  onLoadMoreClick = event => {
+    event.preventDefault();
+
+    const { search } = this.state;
+    const offset = this.state.offset += API_LIMIT;
+
+    this.setState({ offset });
+
+    let url = '/get?offset=' + offset + '&limit=' + API_LIMIT;
+
+    if (search) {
+      url += '&query=' + search;
+    }
+
+    axios.get(url).then(response => {
+      this.setState({
+        gifs: this.state.gifs.concat(response.data)
+      });
+    });
   }
 }
 

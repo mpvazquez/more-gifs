@@ -4,6 +4,7 @@
 		"classnames": "^2.2.5",
 		"ejs": "^2.5.7",
 		"express": "^4.16.2",
+		"masonry-layout": "^4.2.1",
 		"prop-types": "^15.6.1",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",

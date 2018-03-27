@@ -1,74 +1,74 @@
 (function() {
 	'use strict';
 
-	var masonry;
-	var offset = 0;
+	// var masonry;
+	// var offset = 0;
 	var searchPath = null;
 
-	var API_LIMIT = 25;
+	// var API_LIMIT = 25;
 
-	function initMasonry() {
-		var gridElement = document.querySelector('.grid');
+	// function initMasonry() {
+	// 	var gridElement = document.querySelector('.grid');
+	//
+	// 	masonry = new Masonry(gridElement, {
+	// 		fitWidth: true,
+	// 		gutter: 2,
+	// 		itemSelector: '.grid-item'
+	// 	});
+	// }
 
-		masonry = new Masonry(gridElement, {
-			fitWidth: true,
-			gutter: 2,
-			itemSelector: '.grid-item'
-		});
-	}
+	// function loadMoreGifs(event) {
+	// 	event.preventDefault();
+	//
+	// 	offset += API_LIMIT;
+	//
+	// 	var xhr = new XMLHttpRequest();
+	// 	var url = '/get?offset=' + offset + '&limit=' + API_LIMIT;
+	//
+	// 	if (searchPath) {
+	// 		url += '&query=' + searchPath;
+	// 	}
+	//
+	// 	xhr.open('GET', url, true);
+	// 	xhr.responseType = 'text';
+	// 	xhr.onreadystatechange = function() {
+	// 		if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+	// 			renderMoreGifs(xhr.responseText);
+	// 		}
+	// 	}
+	// 	xhr.send();
+	// }
 
-	function loadMoreGifs(event) {
-		event.preventDefault();
-
-		offset += API_LIMIT;
-
-		var xhr = new XMLHttpRequest();
-		var url = '/get?offset=' + offset + '&limit=' + API_LIMIT;
-
-		if (searchPath) {
-			url += '&query=' + searchPath;
-		}
-
-		xhr.open('GET', url, true);
-		xhr.responseType = 'text';
-		xhr.onreadystatechange = function() {
-			if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-				renderMoreGifs(xhr.responseText);
-			}
-		}
-		xhr.send();
-	}
-
-	function renderMoreGifs(data) {
-		try {
-			var json = JSON.parse(data);
-			var gridContainer = document.querySelector('.grid');
-
-			json.forEach(function(gif) {
-				var anchor = document.createElement('a');
-				var img = document.createElement('img');
-
-				anchor.setAttribute('href', gif.url);
-				anchor.setAttribute('target', '_blank');
-
-				img.classList.add('grid-item');
-				img.setAttribute('alt', gif.title);
-				img.setAttribute('src', gif.image);
-
-				anchor.appendChild(img);
-
-				gridContainer.appendChild(anchor);
-
-				masonry.appended(img);
-
-				img.onload = function() {
-					masonry.layout();
-				}
-			});
-		} catch (error) {
-			console.error(error);
-		}
-	}
+	// function renderMoreGifs(data) {
+	// 	try {
+	// 		var json = JSON.parse(data);
+	// 		var gridContainer = document.querySelector('.grid');
+	//
+	// 		json.forEach(function(gif) {
+	// 			var anchor = document.createElement('a');
+	// 			var img = document.createElement('img');
+	//
+	// 			anchor.setAttribute('href', gif.url);
+	// 			anchor.setAttribute('target', '_blank');
+	//
+	// 			img.classList.add('grid-item');
+	// 			img.setAttribute('alt', gif.title);
+	// 			img.setAttribute('src', gif.image);
+	//
+	// 			anchor.appendChild(img);
+	//
+	// 			gridContainer.appendChild(anchor);
+	//
+	// 			masonry.appended(img);
+	//
+	// 			img.onload = function() {
+	// 				masonry.layout();
+	// 			}
+	// 		});
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// }
 
 	function renderSearchHistory(searchHistory) {
 		var historyContainer = document.getElementById('search-history-container');
@@ -97,7 +97,7 @@
 	}
 
 	function setEventListeners() {
-		var loadMoreButton = document.getElementById('load-more-button');
+		// var loadMoreButton = document.getElementById('load-more-button');
 		var searchButton = document.getElementById('search-button');
 		var searchInput = document.getElementById('search-input');
 
@@ -109,7 +109,7 @@
 			}
 		}
 
-		loadMoreButton.addEventListener('click', loadMoreGifs);
+		// loadMoreButton.addEventListener('click', loadMoreGifs);
 
 		searchButton.addEventListener('click', newSearch);
 
@@ -121,7 +121,7 @@
 			}
 		});
 
-		window.addEventListener('load', initMasonry);
+		// window.addEventListener('load', initMasonry);
 	}
 
 	function setLocalStorage(searchHistory) {
