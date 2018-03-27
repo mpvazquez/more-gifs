@@ -5,12 +5,18 @@ import GifItem from '../GifItem/GifItem';
 
 const GifList = ({ gifs }) => {
   return (
-    <div className="grid">
-      {
-        gifs.map(
-          gif => <GifItem gif={gif} />
-        )
-      }
+    <div className="gifListContainer">
+      <div className="grid">
+        {
+          gifs.map(
+            gif => <GifItem gif={gif} />
+          )
+        }
+      </div>
+
+      <button id="load-more-button">
+				<span>MORE<i class="em em-mag_right"></i></span>
+			</button>
     </div>
   );
 }
