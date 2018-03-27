@@ -1,4 +1,9 @@
 {
+	"name": "more-gifs",
+	"version": "2.0.0",
+	"author": "Marco Pretell-Vazquez",
+	"license": "MIT",
+	"repository": "https://github.com/mpvazquez/more-gifs.git",
 	"dependencies": {
 		"axios": "^0.18.0",
 		"classnames": "^2.2.5",
