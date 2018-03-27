@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import GifItem from '../GifItem/GifItem';
+
 const GifList = ({ gifs }) => {
   return (
-    <div>
+    <div className="grid">
       {
-        gifs.map(gif => {
-          return <h2>{gif.title}</h2>
-        })
+        gifs.map(
+          gif => <GifItem gif={gif} />
+        )
       }
     </div>
   );
