@@ -13,37 +13,6 @@
 
 	var app = express();
 
-	// function render(req, res) {
-	// 	var search = req.params.search || null;
-	// 	var synonyms = null;
-	//
-	// 	function renderPage() {
-	// 		giphyAPI(search, QUERY_LIMIT)
-	// 			.catch(handleError)
-	// 			.then(function(response) {
-	// 				res.render('index.ejs', {
-	// 					gifs: parseApiResponse(response),
-	// 					search: search,
-	// 					synonyms: synonyms
-	// 				});
-	// 			});
-	// 	}
-	//
-		// if (search) {
-		// 	search = search.replace(/\+/g, ' ');
-		//
-		// 	bigHugeLabsAPI(search)
-		// 		.catch(handleError)
-		// 		.then(function(response) {
-		// 			synonyms = parseApiResponse(response);
-		//
-		// 			renderPage();
-		// 		});
-		// } else {
-		// 	renderPage();
-		// }
-	// }
-
 	function returnGifData(req, res) {
 		var limit = req.query.limit || QUERY_LIMIT;
 		var offset = req.query.offset || 0;
@@ -73,13 +42,8 @@
 	app.use(express.static('dist'));
 	app.use(express.static('src/static'));
 
-	// app.get('/', render);
 	app.get('/get-gifs', returnGifData);
 	app.get('/get-synonyms', returnSynonymData);
-	// app.get('/search/:search', render);
-	// app.get('/*', function(req, res) {
-	//   res.status(404).render('404.ejs');
-	// });
 
 	app.listen(PORT, function() {
 		console.log('Listening on port', PORT);
