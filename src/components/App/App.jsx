@@ -1,18 +1,19 @@
 import React from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
 
 import Footer from 'components/Footer/Footer';
 import GifList from 'components/GifList/GifList';
 import Header from 'components/Header/Header';
 
-import SearchHistoryList from '../SearchHistoryList/SearchHistoryList';
-import SearchInput from '../SearchInput/SearchInput';
-import SearchSynonymList from '../SearchSynonymList/SearchSynonymList';
+import SearchHistory from 'components/SearchHistory/SearchHistory';
+import SearchInput from 'components/SearchInput/SearchInput';
+import SearchSynonyms from 'components/SearchSynonyms/SearchSynonyms';
+
+import getGifsApi from '../../api/getGifsApi';
+import getSynonymsApi from '../../api/getSynonymsApi';
+
+import { API_LIMIT } from '../../constants';
 
 import styles from './App.pcss';
-
-const API_LIMIT = 25;
 
 class App extends React.Component {
   constructor(props) {
@@ -42,10 +43,10 @@ class App extends React.Component {
           <SearchInput onSubmitSearch={this.onSubmitSearch}
             search={search}
           />
-          <SearchSynonymList synonyms={synonyms}
+          <SearchSynonyms synonyms={synonyms}
             onClickTag={this.onClickTag}
           />
-          <SearchHistoryList history={history}
+          <SearchHistory history={history}
             onClickTag={this.onClickTag}
           />
         </section>
@@ -66,30 +67,21 @@ class App extends React.Component {
   }
 
   getGifs = (search = '', offset = 0) => {
-    let url = `/get-gifs?limit=${API_LIMIT}`;
+    getGifsApi(search, offset)
+      .then(({ data }) => {
+        const { gifs } = this.state;
 
-    if (offset) {
-      url += `&offset=${offset}`;
-    }
-    if (search) {
-      url += `&query=${search}`;
-    }
-
-    axios.get(url).then(response => {
-      this.setState({
-        gifs: this.state.gifs.concat(response.data)
+        this.setState({
+          gifs: gifs.concat(data)
+        });
       });
-    });
   }
 
   getSynonyms = (search = '') => {
-    let url = `/get-synonyms?query=${search}`;
-
-    axios.get(url).then(response => {
-      this.setState({
-        synonyms: response.data
+    getSynonymsApi(search)
+      .then(({ data: synonyms }) => {
+        this.setState({ synonyms });
       });
-    });
   }
 
   onClickTag = event => {
@@ -97,21 +89,7 @@ class App extends React.Component {
 
     const { search } = event.currentTarget.dataset;
 
-    let { history } = this.state;
-
-    if (!history.includes(search)) {
-      history.push(search);
-    }
-
-    this.setState({
-      gifs: [],
-      offset: 0,
-      history,
-      search
-    });
-
-    this.getSynonyms(search);
-    this.getGifs(search);
+    this.onSubmitSearch(search);
   }
 
   onLoadMoreClick = event => {

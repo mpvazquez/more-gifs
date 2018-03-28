@@ -8,28 +8,23 @@ const SearchInput = ({ onSubmitSearch, search }) => {
 
   const placeholder = search || 'Enter GIF Keyword..';
 
-  const onClick = event => {
+  const submitSearch = event => {
     event.preventDefault();
+
     onSubmitSearch(searchInput.value);
-    clearInputValue();
+
+    searchInput.value = '';
   }
 
   const onKeyDown = event => {
     const enterKeyCode = event.keyCode === 13;
 
     if (enterKeyCode) {
-      event.preventDefault();
-
-      onSubmitSearch(searchInput.value);
-      clearInputValue();
+      submitSearch(event);
     }
   }
 
-  const clearInputValue = () => {
-    searchInput.value = '';
-  }
-
-  const setRef = node => {
+  const setInputRef = node => {
     searchInput = node
   }
 
@@ -39,12 +34,12 @@ const SearchInput = ({ onSubmitSearch, search }) => {
 			<input className={styles.searchInput}
         onKeyDown={onKeyDown}
         placeholder={placeholder}
-        ref={setRef}
+        ref={setInputRef}
         type="text"
       />
       &nbsp;
 			<button id="search-button"
-        onClick={onClick}
+        onClick={submitSearch}
         value="Go"
       >
 				<span>GO<i className="em em-mag_right"></i></span>

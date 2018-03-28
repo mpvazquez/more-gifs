@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Play');
+@import url('https://fonts.googleapis.com/css?family=Play:400,700');
 
 :root {
 	--black: rgb(0, 0, 0);
@@ -34,11 +34,6 @@
 	text-align: center;
 }
 
-a {
-	color: var(--white);
-	text-decoration: none;
-}
-
 button {
   border: 0;
   color: var(--dark-gray);
@@ -54,28 +49,12 @@ button {
   padding: 5px 10px 4px 10px;
 }
 
-h1, h4 {
-	margin: 0;
+button:focus {
+	outline: none;
 }
 
 .em {
 	height: 1.2rem;
   margin-top: -3px;
   width: 1.2rem;
-}
-
-.search-tag {
-	margin: 2px;
-}
-
-.tag-container {
-  background: var(--transparent-white);
-  -webkit-border-radius: var(--tag-border-radius);
-	  border-radius: var(--tag-border-radius);
-  -webkit-box-shadow: var(--tag-box-shadow);
-	  box-shadow: var(--tag-box-shadow);
-  margin: 1rem;
-  max-height: 20rem;
-  overflow: scroll;
-  padding: .5rem;
 }
