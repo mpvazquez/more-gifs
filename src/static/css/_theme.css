@@ -34,11 +34,6 @@
 	text-align: center;
 }
 
-a {
-	color: var(--white);
-	text-decoration: none;
-}
-
 button {
   border: 0;
   color: var(--dark-gray);
@@ -56,15 +51,6 @@ button {
 
 button:focus {
 	outline: none;
-}
-
-h1 {
-	font-weight: 400;
-}
-
-h1,
-h4 {
-	margin: 0;
 }
 
 .em {

@@ -10,7 +10,10 @@ const SearchHistory = ({ history, onClickTag }) => {
 
   return (
     <div className={styles.searchHistoryContainer}>
-      <p><i className="em em-clipboard"></i> Search History</p>
+      <p>
+        <i className="em em-clipboard"></i>
+        <span> Search History</span>
+      </p>
 
       <SearchTagList icon="em-pencil2"
         onClickTag={onClickTag}

@@ -13,7 +13,7 @@ const SearchSynonyms = ({ synonyms, onClickTag }) => {
   		<p>
         <span className={styles.searchSynonymsTitle}>STEP 2: </span>
         <i className="em em-point_down"></i>
-        &nbsp; Explore Related Search Terms
+        <span> Explore Related Search Terms</span>
       </p>
 
   		<SearchTagList icon="em-link"

@@ -21,26 +21,25 @@ class GifItem extends React.Component {
     const { gif } = this.props;
 
     return (
-      <a className={ styles.gifItemContainer }
-        href={ gif.url }
+      <a className={styles.gifItemContainer}
+        href={gif.url}
         target="_blank"
       >
-    		<img alt={ gif.title }
-          className={ gifItemClassname }
-          onLoad={ this.updateMasonry }
-          src={ gif.image }
+    		<img alt={gif.title}
+          className={gifItemClassname}
+          onLoad={this.updateMasonry}
+          src={gif.image}
         />
     	</a>
     );
   }
 
-  updateMasonry = () => {
+  updateMasonry() {
     masonry.layout();
   }
 }
 GifItem.propTypes = {
-  gif: PropTypes.object.isRequired,
-  masonry: PropTypes.func.isRequired
+  gif: PropTypes.object.isRequired
 }
 
 export default GifItem;

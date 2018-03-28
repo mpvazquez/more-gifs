@@ -7,7 +7,8 @@ const Footer = () => {
   return (
     <footer className={styles.footerContainer}>
 			<p>
-        <a href="http://www.marcopvazquez.com/"
+        <a className={styles.footerLink}
+          href="http://www.marcopvazquez.com/"
           target="_blank"
         >
           { createdByText }
