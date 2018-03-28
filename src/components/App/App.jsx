@@ -6,9 +6,9 @@ import Footer from 'components/Footer/Footer';
 import GifList from 'components/GifList/GifList';
 import Header from 'components/Header/Header';
 
-import SearchHistoryList from 'components/SearchHistoryList/SearchHistoryList';
+import SearchHistory from 'components/SearchHistory/SearchHistory';
 import SearchInput from 'components/SearchInput/SearchInput';
-import SearchSynonymList from 'components/SearchSynonymList/SearchSynonymList';
+import SearchSynonyms from 'components/SearchSynonyms/SearchSynonyms';
 
 import getGifsApi from '../../api/getGifsApi';
 import getSynonymsApi from '../../api/getSynonymsApi';
@@ -45,10 +45,10 @@ class App extends React.Component {
           <SearchInput onSubmitSearch={this.onSubmitSearch}
             search={search}
           />
-          <SearchSynonymList synonyms={synonyms}
+          <SearchSynonyms synonyms={synonyms}
             onClickTag={this.onClickTag}
           />
-          <SearchHistoryList history={history}
+          <SearchHistory history={history}
             onClickTag={this.onClickTag}
           />
         </section>

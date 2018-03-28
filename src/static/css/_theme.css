@@ -54,11 +54,16 @@ button {
   padding: 5px 10px 4px 10px;
 }
 
+button:focus {
+	outline: none;
+}
+
 h1 {
 	font-weight: 400;
 }
 
-h1, h4 {
+h1,
+h4 {
 	margin: 0;
 }
 
@@ -66,20 +71,4 @@ h1, h4 {
 	height: 1.2rem;
   margin-top: -3px;
   width: 1.2rem;
-}
-
-.search-tag {
-	margin: 2px;
-}
-
-.tag-container {
-  background: var(--transparent-white);
-  -webkit-border-radius: var(--tag-border-radius);
-	  border-radius: var(--tag-border-radius);
-  -webkit-box-shadow: var(--tag-box-shadow);
-	  box-shadow: var(--tag-box-shadow);
-  margin: 1rem;
-  max-height: 20rem;
-  overflow: scroll;
-  padding: .5rem;
 }
