@@ -98,7 +98,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
-      components: join(src, 'components')
+      components: join(src, 'components'),
+      routes: join(src, 'routes')
     },
   },
 }
