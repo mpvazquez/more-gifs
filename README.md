@@ -28,7 +28,6 @@
 * [Node.js](https://nodejs.org/en/) v8.9.2
 * [Express.js](http://expressjs.com/) v4.16.2
 * [Webpack](https://webpack.js.org/) v4.2.0
-* [EJS](http://ejs.co/)
 
 ---
 
