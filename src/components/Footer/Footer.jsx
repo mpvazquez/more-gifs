@@ -3,7 +3,14 @@ import React from 'react';
 import styles from './Footer.pcss';
 
 const Footer = () => {
-  const createdByText = 'This website was created by Marco Pretell-Vázquez';
+  const createdByText = (
+    <span>
+      This website was created by&nbsp;
+      <br className={styles.footerTextBreak} />
+      Marco Pretell-Vázquez
+    </span>
+  );
+
   return (
     <footer className={styles.footerContainer}>
 			<p>

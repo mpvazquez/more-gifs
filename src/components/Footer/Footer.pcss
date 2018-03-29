@@ -1,11 +1,22 @@
 .footerContainer {
   background-color: var(--transparent-gray-light);
   box-shadow: var(--footer-box-shadow);
-  padding: .3rem;
+  padding-top: .3rem;
+  padding-bottom: 1rem;
   text-shadow: var(--text-shadow);
 
   .footerLink {
     color: var(--white);
   	text-decoration: none;
+  }
+
+  .footerTextBreak {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    .footerTextBreak {
+      display: inline-block;
+    }
   }
 }
