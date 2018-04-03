@@ -98,8 +98,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
+      api: join(src, 'api'),
       components: join(src, 'components'),
-      routes: join(src, 'routes')
+      constants: join(src, 'constants'),
+      static: join(src, 'static')
     },
   },
 }
