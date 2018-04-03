@@ -1,24 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+
+import Button from 'components/Button/Button';
 
 import styles from './SearchTagList.pcss';
 
 const SearchTagList = ({ icon, onClickTag, tagList }) => {
-  const iconClassname = classnames('em', icon);
   return (
-    <div className={styles.SearchTagListContainer}>
+    <div className={ styles.SearchTagListContainer }>
       {
         tagList.map(tag => {
           if (!tag) return null;
 
           return (
-            <button className={styles.searchTag}
-              data-search={tag}
-              onClick={onClickTag}
-            >
-              <i className={iconClassname}></i> { tag }
-            </button>
+            <Button className={ styles.searchTag }
+              icon={ icon }
+              iconPosition="left"
+              label={ tag }
+              onClick={ onClickTag }
+            />
           );
         })
       }

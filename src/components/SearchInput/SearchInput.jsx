@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Button from 'components/Button/Button';
+
 import styles from './SearchInput.pcss';
 
 const SearchInput = ({ onSubmitSearch, search }) => {
   let searchInput = null;
 
-  const placeholder = search || 'Enter GIF Keyword..';
+  const placeholder = search.toLowerCase() || 'Enter GIF Keyword..';
 
   const submitSearch = event => {
     event.preventDefault();
@@ -38,12 +40,11 @@ const SearchInput = ({ onSubmitSearch, search }) => {
         type="text"
       />
       &nbsp;
-			<button id="search-button"
-        onClick={submitSearch}
-        value="Go"
-      >
-				<span>GO<i className="em em-mag_right"></i></span>
-			</button>
+      <Button onClick={submitSearch}
+        icon="em-mag_right"
+        iconPosition="right"
+        label="GO"
+      />
 		</section>
   );
 }

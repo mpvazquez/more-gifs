@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Button from 'components/Button/Button';
 import Footer from 'components/Footer/Footer';
 import GifList from 'components/GifList/GifList';
 import Header from 'components/Header/Header';
@@ -54,11 +55,12 @@ class App extends React.Component {
         <section>
           <GifList gifs={gifs} />
 
-          <button className={styles.loadMoreButton}
+          <Button className={styles.loadMoreButton}
+            icon="em-mag_right"
+            iconPosition="right"
+            label="MORE"
             onClick={this.onLoadMoreClick}
-          >
-            <span>MORE<i className="em em-mag_right"></i></span>
-          </button>
+          />
         </section>
 
         <Footer />
@@ -87,7 +89,7 @@ class App extends React.Component {
   onClickTag = event => {
     event.preventDefault();
 
-    const { search } = event.currentTarget.dataset;
+    const { prop: search } = event.currentTarget.dataset;
 
     this.onSubmitSearch(search);
   }
