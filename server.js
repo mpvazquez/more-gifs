@@ -25,9 +25,9 @@
 		giphyAPI(query, limit, offset)
 			.catch(handleError)
 			.then(function(response) {
-				var json = parseApiResponse(response);
+				var gifs = parseApiResponse(response);
 
-				res.json(json);
+				res.json(gifs);
 			});
 	}
 

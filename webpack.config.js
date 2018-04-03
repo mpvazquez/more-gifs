@@ -92,7 +92,7 @@ module.exports = {
       filename: 'bundle.css'
     }),
     new HtmlPlugin({
-      template: 'src/static/index.html'
+      template: join(src, 'static/index.html')
     })
   ],
   resolve: {
