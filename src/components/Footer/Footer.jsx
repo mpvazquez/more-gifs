@@ -13,8 +13,8 @@ const Footer = () => {
 
   return (
     <footer className={styles.footerContainer}>
-			<p>
-        <a className={styles.footerLink}
+			<p className={styles.footerText}>
+        <a className={styles.footerTextLink}
           href="http://www.marcopvazquez.com/"
           target="_blank"
         >
