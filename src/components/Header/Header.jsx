@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Icon from 'components/Icon/Icon';
+
 import styles from './Header.pcss';
 
 const Header = () => {
@@ -9,7 +11,7 @@ const Header = () => {
         href="/"
       >
 				<h1 className={styles.headerH1}>
-					<i className="em em-mostly_sunny"></i>
+					<Icon className="em-mostly_sunny" />
 					<span> MORE GIFs</span>
 				</h1>
 				<h4 className={styles.headerH4}>

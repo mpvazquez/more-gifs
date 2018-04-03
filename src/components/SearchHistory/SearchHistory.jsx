@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from 'components/Icon/Icon';
 import SearchTagList from 'components/SearchTagList/SearchTagList';
 
 import styles from './SearchHistory.pcss';
@@ -11,7 +12,7 @@ const SearchHistory = ({ history, onClickTag }) => {
   return (
     <div className={styles.searchHistoryContainer}>
       <p>
-        <i className="em em-clipboard"></i>
+        <Icon className="em-clipboard" />
         <span> Search History</span>
       </p>
 

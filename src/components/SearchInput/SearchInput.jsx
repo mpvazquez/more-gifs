@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from 'components/Button/Button';
+import Icon from 'components/Icon/Icon';
 
 import styles from './SearchInput.pcss';
 
@@ -32,7 +33,7 @@ const SearchInput = ({ onSubmitSearch, search }) => {
 
   return (
     <section className={styles.searchInputContainer}>
-			<span>STEP 1: <i className="em em-point_right"></i>&nbsp; </span>
+			<span>STEP 1: <Icon className="em-point_right" />&nbsp; </span>
 			<input className={styles.searchInput}
         onKeyDown={onKeyDown}
         placeholder={placeholder}

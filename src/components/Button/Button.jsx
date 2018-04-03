@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+import Icon from 'components/Icon/Icon';
+
 import styles from './Button.pcss';
 
 const Button = ({ className, icon, iconPosition = 'right', label, onClick }) => {
   const buttonClassname = classnames(className, [styles.buttonContainer]);
-  const iconClassname = classnames('em', icon, {
-    [styles.left]: iconPosition === 'left'
+  const iconClassname = classnames(icon, {
+    [styles.buttonIconLeft]: iconPosition === 'left'
   });
 
   return (
@@ -16,7 +18,7 @@ const Button = ({ className, icon, iconPosition = 'right', label, onClick }) => 
       onClick={ onClick }
     >
       <span>{ label }</span>
-      <i className={ iconClassname } />
+      <Icon className={ iconClassname } />
     </button>
   );
 }

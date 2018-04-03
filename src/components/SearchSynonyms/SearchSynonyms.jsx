@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from 'components/Icon/Icon';
 import SearchTagList from 'components/SearchTagList/SearchTagList';
 
 import styles from './SearchSynonyms.pcss';
@@ -12,7 +13,7 @@ const SearchSynonyms = ({ synonyms, onClickTag }) => {
     <div className={styles.searchSynonymsContainer}>
   		<p>
         <span className={styles.searchSynonymsTitle}>STEP 2: </span>
-        <i className="em em-point_down"></i>
+        <Icon className="em-point_down" />
         <span> Explore Related Search Terms</span>
       </p>
 
