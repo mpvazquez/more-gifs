@@ -13,6 +13,10 @@
 
 	var app = express();
 
+	function redirect(req, res) {
+		res.redirect('/');
+	}
+
 	function returnGifData(req, res) {
 		var limit = req.query.limit || QUERY_LIMIT;
 		var offset = req.query.offset || 0;
@@ -44,6 +48,7 @@
 
 	app.get('/get-gifs', returnGifData);
 	app.get('/get-synonyms', returnSynonymData);
+	app.get('/*', redirect);
 
 	app.listen(PORT, function() {
 		console.log('Listening on port', PORT);
