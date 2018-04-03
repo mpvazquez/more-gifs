@@ -9,13 +9,14 @@ const SearchTagList = ({ icon, onClickTag, tagList }) => {
   return (
     <div className={ styles.SearchTagListContainer }>
       {
-        tagList.map(tag => {
+        tagList.map((tag, index) => {
           if (!tag) return null;
 
           return (
             <Button className={ styles.searchTag }
               icon={ icon }
               iconPosition="left"
+              key={ index }
               label={ tag }
               onClick={ onClickTag }
             />

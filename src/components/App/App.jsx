@@ -34,7 +34,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { children, gifs, history, search, synonyms } = this.state;
+    const { gifs, history, search, synonyms } = this.state;
 
     return (
       <div className={styles.appContainer}>

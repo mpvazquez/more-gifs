@@ -13,7 +13,11 @@ const GifList = ({ gifs }) => {
     <div className={gifListClassname}>
       {
         gifs.map(
-          gif => <GifItem gif={gif} />
+          gif => (
+            <GifItem gif={gif}
+              key={gif.id}
+            />
+          )
         )
       }
     </div>

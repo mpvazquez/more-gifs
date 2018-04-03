@@ -11,13 +11,13 @@ const SearchSynonyms = ({ synonyms, onClickTag }) => {
 
   return (
     <div className={styles.searchSynonymsContainer}>
-  		<p>
+      <p>
         <span className={styles.searchSynonymsTitle}>STEP 2: </span>
         <Icon className="em-point_down" />
         <span> Explore Related Search Terms</span>
       </p>
 
-  		<SearchTagList icon="em-link"
+      <SearchTagList icon="em-link"
         onClickTag={onClickTag}
         tagList={synonyms}
       />
