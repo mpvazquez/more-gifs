@@ -13,6 +13,12 @@ const Footer = () => {
 
   return (
     <footer className={styles.footerContainer}>
+      <a href="https://giphy.com/" target="_blank">
+        <img alt="Powered By Giphy"
+          src="/images/PoweredBy_200px-Black_HorizLogo.png"
+        />
+      </a>
+
 			<p className={styles.footerText}>
         <a className={styles.footerTextLink}
           href="http://www.marcopvazquez.com/"
@@ -21,13 +27,6 @@ const Footer = () => {
           { createdByText }
         </a>
       </p>
-
-			<a href="https://giphy.com/" target="_blank">
-				<img alt="Powered By Giphy"
-          id="giphy-logo-badge"
-          src="/images/PoweredBy_200px-Black_HorizLogo.png"
-        />
-			</a>
 		</footer>
   );
 }
