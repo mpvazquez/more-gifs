@@ -108,19 +108,21 @@ class App extends React.Component {
   onSubmitSearch = search => {
     let { history } = this.state;
 
-    if (!history.includes(search)) {
-      history.push(search);
+    if (search) {
+      if (!history.includes(search)) {
+        history.push(search);
+      }
+
+      this.setState({
+        gifs: [],
+        offset: 0,
+        history,
+        search
+      });
+
+      this.getGifs(search);
+      this.getSynonyms(search);
     }
-
-    this.setState({
-      gifs: [],
-      offset: 0,
-      history,
-      search
-    });
-
-    this.getGifs(search);
-    this.getSynonyms(search);
   }
 }
 
