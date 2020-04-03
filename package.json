@@ -19,8 +19,7 @@
 	"scripts": {
 		"build": "rm -rf /node_modules && npm install && webpack --display-error-details",
 		"lint": "eslint . --ext .js,.jsx",
-		"start": "npm run heroku-prebuild && npm run build && node server.js",
-		"start-prod": "NODE_ENV=production && npm run build && node server.js",
+		"start": "npm run build && npm run heroku-prebuild && node server.js",
 		"heroku-prebuild": "npm install --only=dev"
 	},
 	"devDependencies": {
