@@ -5,17 +5,17 @@
 	"license": "MIT",
 	"repository": "https://github.com/mpvazquez/more-gifs.git",
 	"dependencies": {
-		"axios": "^0.18.0",
+		"axios": "^0.18.1",
 		"classnames": "^2.2.6",
-		"express": "^4.16.4",
+		"express": "^4.17.1",
 		"masonry-layout": "^4.2.2",
-		"npm": "^6.9.0",
+		"npm": "^6.14.4",
 		"prop-types": "^15.7.2",
-		"react": "^16.8.4",
-		"react-dom": "^16.8.4",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
 		"react-router-dom": "^4.3.1",
-		"request": "^2.88.0",
-		"request-promise": "^4.2.4"
+		"request": "^2.88.2",
+		"request-promise": "^4.2.5"
 	},
 	"scripts": {
 		"build": "rm -rf /node_modules && npm install && webpack --display-error-details",
@@ -24,7 +24,7 @@
 		"heroku-prebuild": "npm install --dev"
 	},
 	"devDependencies": {
-		"ajv": "^6.10.0",
+		"ajv": "^6.12.0",
 		"autoprefixer": "^8.6.5",
 		"babel-core": "^6.26.3",
 		"babel-eslint": "^8.2.6",
@@ -35,7 +35,7 @@
 		"babel-preset-stage-2": "^6.24.1",
 		"css-loader": "^0.28.11",
 		"eslint": "^4.19.1",
-		"eslint-plugin-react": "^7.12.4",
+		"eslint-plugin-react": "^7.19.0",
 		"html-webpack-plugin": "^3.2.0",
 		"mini-css-extract-plugin": "^0.2.0",
 		"path": "^0.12.7",
@@ -43,7 +43,7 @@
 		"precss": "^3.1.2",
 		"style-loader": "^0.20.3",
 		"url-loader": "^1.1.2",
-		"webpack": "^4.29.6",
-		"webpack-cli": "^3.1.1"
+		"webpack": "^4.42.1",
+		"webpack-cli": "^3.3.11"
 	}
 }
