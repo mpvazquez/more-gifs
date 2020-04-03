@@ -20,7 +20,7 @@
 		"build": "rm -rf /node_modules && npm install && webpack --display-error-details",
 		"lint": "eslint . --ext .js,.jsx",
 		"start": "npm run heroku-prebuild && npm run build && node server.js",
-		"heroku-prebuild": "npm install --dev"
+		"heroku-prebuild": "npm install --only=dev"
 	},
 	"devDependencies": {
 		"ajv": "^6.12.0",
