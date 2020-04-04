@@ -1,6 +1,6 @@
-var handleError = function(error) {
+var handleError = function(error, message = "") {
 	// eslint-disable-next-line no-console
-	console.error(error);
+	console.error(message, error);
 }
 
 module.exports = handleError;

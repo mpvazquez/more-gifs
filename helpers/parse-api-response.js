@@ -6,6 +6,7 @@ var parseApiResponse = function(response) {
 	try {
 		var json = JSON.parse(response);
 
+		// giphy API returns JSON w/ a data property
 		if (json.data) {
 			for (var i = 0; i < json.data.length; i++) {
 				data.push({
@@ -21,7 +22,7 @@ var parseApiResponse = function(response) {
 			}
 		}
 	} catch (error) {
-		handleError(error);
+		handleError(error, 'Error in parseApiResponse: ');
 	}
 
 	return data;

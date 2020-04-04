@@ -23,7 +23,9 @@
 		var query = req.query.query;
 
 		giphyAPI(query, limit, offset)
-			.catch(handleError)
+			.catch(function(error) {
+				handleError(error, 'Error in server.js API response from giphyAPI: ');
+			})
 			.then(function(response) {
 				var gifs = parseApiResponse(response);
 
@@ -35,11 +37,15 @@
 		var query = req.query.query;
 
 		bigHugeLabsAPI(query)
-			.catch(handleError)
+			.catch(function(error) {
+				handleError(error, 'Error in server.js API response from bigHugeLabsAPI: ');
+			})
 			.then(function(response) {
-				var synonyms = parseApiResponse(response);
+				if (typeof response !== 'undefined') {
+					var synonyms = parseApiResponse(response);
 
-				res.json(synonyms);
+					res.json(synonyms);
+				}
 			});
 	}
 
