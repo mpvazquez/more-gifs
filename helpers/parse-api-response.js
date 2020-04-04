@@ -1,31 +1,51 @@
 var handleError = require('./handle-api-error.js');
 
+var _parseGiphyData = function(data) {
+	var parsedData = [];
+
+	for (var i = 0; i < data.length; i++) {
+		parsedData.push({
+			image: data[i].images.fixed_width.url,
+			title: data[i].title,
+			url: data[i].url
+		});
+	}
+
+	return parsedData;
+}
+
+var _parseBigHugeLabsData = function(data) {
+	var parsedData = [];
+
+	// this API can return an array OR an object. Need to parse both.
+	if (data instanceof Array) {
+		parsedData = data;
+	} else {
+		for (var key in data) {
+			var synonymList = data[key].syn;
+			parsedData = parsedData.concat(synonymList);
+		}
+	}
+
+	return parsedData;
+}
+
 var parseApiResponse = function(response) {
-	var data = [];
+	var output = [];
 
 	try {
-		var json = JSON.parse(response);
+		var data = JSON.parse(response);
 
-		// giphy API returns JSON w/ a data property
-		if (json.data) {
-			for (var i = 0; i < json.data.length; i++) {
-				data.push({
-					image: json.data[i].images.fixed_width.url,
-					title: json.data[i].title,
-					url: json.data[i].url
-				});
-			}
+		if (data.data) {
+			output = _parseGiphyData(data.data);
 		} else {
-			for (var key in json) {
-				var synonymList = json[key].syn;
-				data = data.concat(synonymList);
-			}
+			output = _parseBigHugeLabsData(data);
 		}
 	} catch (error) {
 		handleError(error, 'Error in parseApiResponse: ');
 	}
 
-	return data;
+	return output;
 }
 
 module.exports = parseApiResponse;
