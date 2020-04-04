@@ -12,6 +12,14 @@
     overflow: hidden;
     padding: 5px 3px 4px 3px;
     text-overflow: ellipsis;
+
+    &:focus {
+      outline-color: var(--blue);
+    }
+
+    &::placeholder {
+      font-style: italic;
+    }
   }
 
   @media (max-width: 768px) {

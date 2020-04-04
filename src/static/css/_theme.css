@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Play:400,700');
 
 :root {
+	--background-blue: rgb(90, 140, 250);
+	--background-violet: rgb(139, 61, 184);
+
 	--black: rgb(0, 0, 0);
-	--blue: rgb(90, 140, 250);
-	--violet: rgb(139, 61, 184);
 	--white: rgb(255,255,255);
+	--blue: rgb(135, 206, 250);
 
 	--light-gray: rgb(232,232,232);
 	--medium-gray: rgb(200,200,200);
@@ -26,9 +28,9 @@
 
 	--text-shadow: 0px 1px 2px var(--black);
 
-	background: var(--blue);
-		background: -webkit-linear-gradient(330deg, var(--violet) 30%, var(--blue) 70%);
-		background: linear-gradient(120deg, var(--violet) 30%, var(--blue) 70%);
+	background: var(--background-blue);
+		background: -webkit-linear-gradient(330deg, var(--background-violet) 30%, var(--background-blue) 70%);
+		background: linear-gradient(120deg, var(--background-violet) 30%, var(--background-blue) 70%);
 	color: var(--white);
 	font-family: var(--font-family);
 	text-align: center;
